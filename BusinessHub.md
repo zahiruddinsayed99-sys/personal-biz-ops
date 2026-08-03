@@ -1,6 +1,6 @@
-I think we've converged on a direction that is ambitious but realistic. I would avoid changing the scope anymore and instead treat this as the baseline architecture document for the project.
+# BusinessHub AI
 
-Portfolio Vision
+# Portfolio Vision
 
 Project Name (working title): BusinessHub AI
 
@@ -8,18 +8,17 @@ Tagline:
 
 > AI-Powered Multi-Tenant Business Operating Platform
 
-
-
 This is not a collection of projects.
 
 It is one commercial SaaS platform with multiple business modules.
 
+---
 
 ---
 
-Primary Objectives
+# Primary Objectives
 
-Technical
+## Technical
 
 Demonstrate:
 
@@ -45,11 +44,9 @@ Observability
 
 Security
 
-
-
 ---
 
-Career
+## Career
 
 This portfolio should help you:
 
@@ -61,13 +58,13 @@ Win Freelance projects
 
 Convert into a commercial SaaS later
 
-
+---
 
 ---
 
-Technology Stack
+# Technology Stack
 
-Frontend
+## Frontend
 
 ✅ Angular 20+
 
@@ -83,11 +80,9 @@ Standalone Components
 
 Lazy Loading
 
-
-
 ---
 
-Backend
+## Backend
 
 FastAPI
 
@@ -103,34 +98,29 @@ Simple architecture
 
 Strong OpenAPI generation
 
-
-
 ---
 
-Database
+## Database
 
 PostgreSQL
 
-
 ---
 
-Cache
+## Cache
 
 Redis
 
-
 ---
 
-Object Storage
+## Object Storage
 
 MinIO locally
 
 AWS S3 later
 
-
 ---
 
-Authentication
+## Authentication
 
 JWT
 
@@ -140,10 +130,9 @@ OAuth
 
 RBAC
 
-
 ---
 
-Deployment
+## Deployment
 
 Docker
 
@@ -155,10 +144,11 @@ Kubernetes manifests (after MVP)
 
 Nginx
 
+---
 
 ---
 
-Overall Architecture
+# Overall Architecture
 
 BusinessHub AI
 
@@ -185,12 +175,13 @@ Core Platform
 
 Everything shares the same authentication, organizations, users, permissions, notifications, and AI services.
 
+---
 
 ---
 
-Module Roadmap
+# Module Roadmap
 
-Phase 1
+## Phase 1
 
 Core Platform
 
@@ -216,14 +207,13 @@ Deliverables
 
 ✔ Audit Logs
 
-
 ---
 
-Phase 2
+## Phase 2
 
 CRM
 
-Features
+## Features
 
 Leads
 
@@ -239,8 +229,7 @@ Tasks
 
 Calendar
 
-
-AI
+## AI
 
 Email generation
 
@@ -248,15 +237,13 @@ Lead summary
 
 Follow-up suggestions
 
-
-
 ---
 
-Phase 3
+## Phase 3
 
 E-commerce
 
-Features
+## Features
 
 Products
 
@@ -272,8 +259,7 @@ Coupons
 
 Reviews
 
-
-Seller
+## Seller
 
 Product Management
 
@@ -281,29 +267,25 @@ Orders
 
 Reports
 
-
-Admin
+## Admin
 
 Vendor approval
 
 Refunds
 
-
-AI
+## AI
 
 Product descriptions
 
 Product recommendations
 
-
-
 ---
 
-Phase 4
+## Phase 4
 
 Inventory
 
-Features
+## Features
 
 Warehouses
 
@@ -317,22 +299,19 @@ Suppliers
 
 Transfers
 
-
-AI
+## AI
 
 Demand Forecast
 
 Reorder Suggestions
 
-
-
 ---
 
-Phase 5
+## Phase 5
 
 LMS
 
-Features
+## Features
 
 Courses
 
@@ -344,8 +323,7 @@ Quizzes
 
 Certificates
 
-
-AI
+## AI
 
 Quiz generation
 
@@ -353,11 +331,11 @@ AI Tutor
 
 Summaries
 
-
+---
 
 ---
 
-AI Platform
+# AI Platform
 
 One shared service.
 
@@ -375,13 +353,13 @@ Summaries
 
 Recommendations
 
-
 Every module consumes this service.
-
 
 ---
 
-Backend Structure
+---
+
+# Backend Structure
 
 app/
 
@@ -405,10 +383,11 @@ tests/
 
 Keep business rules in the domain layer and avoid mixing them with API logic.
 
+---
 
 ---
 
-Angular Structure
+# Angular Structure
 
 src/app
 
@@ -434,10 +413,11 @@ analytics/
 
 Each feature should be lazy loaded and as independent as possible.
 
+---
 
 ---
 
-Infrastructure
+# Infrastructure
 
 Include from the beginning:
 
@@ -455,35 +435,33 @@ API Documentation
 
 Seed Data
 
-
+---
 
 ---
 
-Testing
+# Testing
 
-Minimum
+## Minimum
 
-Backend
+## Backend
 
 Unit Tests
 
 Integration Tests
 
-
-Frontend
+## Frontend
 
 Component Tests
 
-
-End-to-End
+## End-to-End
 
 Playwright
 
-
+---
 
 ---
 
-Git Strategy
+# Git Strategy
 
 main
 
@@ -499,10 +477,11 @@ feature/lms
 
 Let Jules work on feature branches and create pull requests.
 
+---
 
 ---
 
-AI Workflow
+# AI Workflow
 
 Antigravity
 
@@ -515,8 +494,6 @@ Feature implementation
 Debugging
 
 Refactoring
-
-
 
 ---
 
@@ -536,19 +513,19 @@ Repository cleanup
 
 Large refactors
 
-
+---
 
 ---
 
-Development Timeline
+# Development Timeline
 
-Month 1
+## Month 1
 
-Week 1
+## Week 1
 
 Architecture
 
-Authentication
+## Authentication
 
 Docker
 
@@ -556,10 +533,9 @@ Angular setup
 
 FastAPI setup
 
-
 ---
 
-Week 2
+## Week 2
 
 Organizations
 
@@ -571,64 +547,61 @@ Notifications
 
 Audit
 
-
 ---
 
-Week 3
+## Week 3
 
 CRM
 
-
 ---
 
-Week 4
+## Week 4
 
 CRM complete
 
-Deployment
-
+## Deployment
 
 ---
 
-Month 2
+## Month 2
 
-Week 5
+## Week 5
 
 E-commerce
 
-
 ---
 
-Week 6
+## Week 6
 
 Inventory
 
-
 ---
 
-Week 7
+## Week 7
 
 LMS
 
+---
+
+## Week 8
 
 ---
 
-Week 8
-
-Testing
+# Testing
 
 Documentation
 
-Deployment
+## Deployment
 
 Demo videos
 
 Portfolio website
 
+---
 
 ---
 
-What Makes This Portfolio Different
+# What Makes This Portfolio Different
 
 Rather than showing:
 
@@ -640,15 +613,14 @@ LMS Project
 
 E-commerce Project
 
-
 you'll be able to present:
 
 > BusinessHub AI — a modular, multi-tenant business platform built with Angular and FastAPI, featuring CRM, e-commerce, inventory management, LMS, AI services, Docker-based deployment, CI/CD, and production-ready architecture.
 
-
-
 That tells a much stronger story because it demonstrates platform thinking, code reuse, modular design, and enterprise engineering.
 
-Next document to create
+---
+
+# Next document to create
 
 I recommend the next artifact be a Software Requirements Specification (SRS) with around 200–300 functional requirements, followed by an architecture document, database schema, API contracts, and a phased implementation backlog. Those documents will let you treat this like a real commercial software product from day one.
