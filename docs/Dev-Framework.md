@@ -1,3 +1,11 @@
+Engineering Track,Primary Tooling,GitHub Integration Method
+Project Tracking,"GitHub Projects, GitHub Issues",Automated board state changes via PR events
+AI Development,"Cursor, Copilot Workspace, Claude Code",Branch-based code edits and PR generation
+Code Quality & Linting,"ESLint, Biome, Prettier, Husky",Pre-commit hooks + GitHub Actions CI gate
+Security Scanning,"GitHub CodeQL, Dependabot, Snyk",Native GitHub Security tab alerts on PRs
+Testing,"Vitest, Playwright, Mock Service Worker",Running headless test runners in GitHub Actions
+CI/CD & Deployment,"GitHub Actions, Vercel / Docker / AWS",Environment protection rules + deployment checks
+Monitoring,"Sentry, PostHog",Auto-creating GitHub Issues from untracked error spikes
 ## Key Conceptual Difference
 
 * **Traditional Development:** Deterministic, human-driven execution. Humans write the logic, write tests, manage dependencies, and debug errors step-by-step.
