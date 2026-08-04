@@ -1,58 +1,50 @@
-This is a notoriously stubborn WSL2 issue. The reason both methods failed is that **Docker BuildKit** (Docker's modern build engine) runs inside its own isolated network namespace. Even when we disable IPv6 in WSL, BuildKit still detects an IPv6 loopback route on your virtual network adapter and attempts to route DNS queries through `[::1]:53`, which resolves to nothing inside the build container.
+**Yes, please proceed with Solution 2.** 
 
-As your Principal Architect, I want to get you unblocked immediately. Here are the three most effective, battle-tested solutions to bypass BuildKit's DNS routing bugs in WSL2. 
+The fact that the legacy builder (with `DOCKER_BUILDKIT=0`) also failed with a "not found" error confirms that **the entire DNS resolution system inside your WSL distribution is currently broken.** Docker cannot resolve any external domain names because WSL's auto-generated nameserver is pointing to an inactive host gateway.
 
----
+Here is exactly how to execute **Solution 2** to clean up and lock your WSL name resolution, followed by a quick test to verify it works before you run the Docker build again.
 
-### **Solution 1: Bypass BuildKit and Use the Legacy Build Engine (Fastest & 100% Guaranteed)**
-If you are in a rush and want to build the database right now, you can temporarily disable BuildKit for this build session. This forces Docker to use the legacy container builder, which directly inherits your WSL terminal's active network settings and bypasses the isolated network namespace entirely.
+### **Step 1: Execute Solution 2 in WSL**
+Run these three commands in your WSL terminal:
 
-Run these commands in your WSL terminal:
 ```bash
-# Disable BuildKit for the current terminal session
-export DOCKER_BUILDKIT=0
-export COMPOSE_DOCKER_CLI_BUILD=0
-
-# Run the build again
-docker compose build --no-cache
-```
-*If this works, you can make it permanent for your terminal profile by adding those two `export` lines to the bottom of your `~/.bashrc` file.*
-
----
-
-### **Solution 2: Force-Lock Your WSL `/etc/resolv.conf` (The Core System Fix)**
-In some WSL2 installations, `/etc/resolv.conf` is actually a symlink pointing back to a dynamically generated Windows resolver. Even if you edit the file, WSL will silently restore the symlink or ignore your manual changes. We need to destroy the symlink, write a physical file, and lock it down.
-
-Execute the following commands in WSL:
-```bash
-# 1. Force delete the existing resolv.conf symlink
+# 1. Force remove the broken auto-generated symlink
 sudo rm -f /etc/resolv.conf
 
-# 2. Write static public DNS servers directly to a physical file
+# 2. Create a physical file with public Google and Cloudflare DNS servers
 sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 sudo sh -c 'echo "nameserver 1.1.1.1" >> /etc/resolv.conf'
 
-# 3. Lock the file with the "immutable" attribute so WSL can never overwrite it
+# 3. Make the file immutable so WSL doesn't overwrite it when you restart
 sudo chattr +i /etc/resolv.conf
 ```
-*(Note: If you ever need to edit this file in the future, you must unlock it first using `sudo chattr -i /etc/resolv.conf`).*
+*(Note: If you get an error saying `chattr: command not found`, run `sudo apt-get install e2fsprogs` first. If it says `Operation not supported`, make sure you are running this from your home directory `/home/zahsay` and not from a shared Windows mount path like `/mnt/c/`).*
 
 ---
 
-### **Solution 3: Perform a Hard Shutdown of the WSL VM**
-If you edited your `.wslconfig` in Windows (Method 2 from earlier), those hardware-level changes **will not take effect** if you simply closed and reopened your WSL terminal. The WSL virtual machine remains suspended in the background.
+### **Step 2: Verify Your WSL Internet Connectivity**
+Before launching the Docker build, test if your WSL subsystem can resolve domains now. Run:
 
-To apply the changes, you must perform a hard reboot of the utility VM:
-1. Open a **Windows PowerShell** terminal (as Administrator) on your host machine.
-2. Run this command to force-kill all active WSL instances:
-   ```powershell
-   wsl --shutdown
-   ```
-3. Reopen your WSL terminal, navigate back to your project directory, and run your build command:
-   ```bash
-   docker compose up --build -d
-   ```
+```bash
+curl -I https://registry-1.docker.io
+```
+
+*   **If it returns a stream of HTTP headers (such as `HTTP/2 200` or `HTTP/2 401 Unauthorized`), your connection is fully restored!** Proceed to Step 3.
+*   **If it still hangs or says "could not resolve host",** then your Windows host firewall or VPN is actively blocking WSL's virtual network adapter from reaching the outside internet.
+
+---
+
+### **Step 3: Run the Build Again**
+Once the `curl` check succeeds, reset your build environment and run:
+
+```bash
+# Clear legacy flags if you want to use BuildKit again
+export DOCKER_BUILDKIT=1
+
+# Trigger the build
+docker compose build --no-cache
+```
 
 ***
 
-🛠️ I recommend trying **Solution 1** first to get the database built instantly, and then applying **Solution 2** when you have a moment to permanently clean up your WSL networking. Let me know which one gets your green lights on!
+🌐 Let me know the result of the `curl` check after editing `/etc/resolv.conf` so we can make sure your base network bridge is stable!
