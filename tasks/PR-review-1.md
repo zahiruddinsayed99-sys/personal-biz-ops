@@ -1,86 +1,58 @@
-This specific error—`dial tcp: lookup auth.docker.io on [::1]:53: read udp [::1]:43197->[::1]:53: read: connection refused`—is a known network-bridging issue in Windows WSL2. 
+This is a notoriously stubborn WSL2 issue. The reason both methods failed is that **Docker BuildKit** (Docker's modern build engine) runs inside its own isolated network namespace. Even when we disable IPv6 in WSL, BuildKit still detects an IPv6 loopback route on your virtual network adapter and attempts to route DNS queries through `[::1]:53`, which resolves to nothing inside the build container.
 
-The error tells us that **Docker's build engine (BuildKit) is aggressively trying to resolve DNS via IPv6 loopback (`[::1]`)** instead of using IPv4, and failing because there is no IPv6 DNS server listening inside WSL.
-
-As your Principal Architect, here are the three cleanest ways to fix this, ordered from the most common Docker-specific fix to a universal WSL-level override.
+As your Principal Architect, I want to get you unblocked immediately. Here are the three most effective, battle-tested solutions to bypass BuildKit's DNS routing bugs in WSL2. 
 
 ---
 
-### **Method 1: Force the Docker Daemon to Use IPv4 DNS (Most Reliable)**
-We can bypass WSL's dynamic DNS bridging entirely by telling the Docker daemon to explicitly use public IPv4 DNS servers (like Google and Cloudflare) when pulling images.
+### **Solution 1: Bypass BuildKit and Use the Legacy Build Engine (Fastest & 100% Guaranteed)**
+If you are in a rush and want to build the database right now, you can temporarily disable BuildKit for this build session. This forces Docker to use the legacy container builder, which directly inherits your WSL terminal's active network settings and bypasses the isolated network namespace entirely.
 
-#### **If you are using Docker Desktop for Windows (with WSL2 Integration):**
-1. Open the **Docker Desktop** dashboard in Windows.
-2. Click the **Gear Icon (Settings)** in the top right.
-3. Select **Docker Engine** from the left-hand menu.
-4. In the JSON configuration editor, add `"dns": ["8.8.8.8", "1.1.1.1"]` to the root JSON object. For example:
-   ```json
-   {
-     "builder": {
-       "gc": {
-         "defaultKeepStorage": "20GB",
-         "enabled": true
-       }
-     },
-     "dns": [
-       "8.8.8.8",
-       "1.1.1.1"
-     ],
-     "features": {
-       "buildkit": true
-     }
-   }
-   ```
-5. Click **Apply & restart**.
+Run these commands in your WSL terminal:
+```bash
+# Disable BuildKit for the current terminal session
+export DOCKER_BUILDKIT=0
+export COMPOSE_DOCKER_CLI_BUILD=0
 
-#### **If you are running native Docker Engine directly in WSL (No Docker Desktop):**
-1. Edit (or create) the daemon config file inside WSL:
-   ```bash
-   sudo nano /etc/docker/daemon.json
-   ```
-2. Paste the following configuration:
-   ```json
-   {
-     "dns": ["8.8.8.8", "1.1.1.1"]
-   }
-   ```
-3. Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`), then restart the Docker service:
-   ```bash
-   sudo service docker restart
-   ```
+# Run the build again
+docker compose build --no-cache
+```
+*If this works, you can make it permanent for your terminal profile by adding those two `export` lines to the bottom of your `~/.bashrc` file.*
 
 ---
 
-### **Method 2: Disable IPv6 Loopbacks in WSL2 (WSL Global Fix)**
-If Windows has IPv6 enabled, WSL2 tries to bridge it, but Docker's internal container networking often breaks on the virtual switch. We can force WSL to operate strictly in IPv4.
+### **Solution 2: Force-Lock Your WSL `/etc/resolv.conf` (The Core System Fix)**
+In some WSL2 installations, `/etc/resolv.conf` is actually a symlink pointing back to a dynamically generated Windows resolver. Even if you edit the file, WSL will silently restore the symlink or ignore your manual changes. We need to destroy the symlink, write a physical file, and lock it down.
 
-1. On your **Windows host** (not inside WSL), open File Explorer and go to your User Profile folder:
-   * Run (`Win + R`) and type: `%USERPROFILE%` (this takes you to `C:\Users\YourUsername`).
-2. Check if a file named **`.wslconfig`** exists. If it does not, create a new text file and name it exactly `.wslconfig` (ensure there is no `.txt` extension).
-3. Open it in Notepad and add the following lines to disable IPv6:
-   ```ini
-   [wsl2]
-   ipv6=false
-   ```
-4. Save the file.
-5. Open a **Windows PowerShell** or Command Prompt window and shut down your WSL subsystem to apply the new hardware boundaries:
+Execute the following commands in WSL:
+```bash
+# 1. Force delete the existing resolv.conf symlink
+sudo rm -f /etc/resolv.conf
+
+# 2. Write static public DNS servers directly to a physical file
+sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+sudo sh -c 'echo "nameserver 1.1.1.1" >> /etc/resolv.conf'
+
+# 3. Lock the file with the "immutable" attribute so WSL can never overwrite it
+sudo chattr +i /etc/resolv.conf
+```
+*(Note: If you ever need to edit this file in the future, you must unlock it first using `sudo chattr -i /etc/resolv.conf`).*
+
+---
+
+### **Solution 3: Perform a Hard Shutdown of the WSL VM**
+If you edited your `.wslconfig` in Windows (Method 2 from earlier), those hardware-level changes **will not take effect** if you simply closed and reopened your WSL terminal. The WSL virtual machine remains suspended in the background.
+
+To apply the changes, you must perform a hard reboot of the utility VM:
+1. Open a **Windows PowerShell** terminal (as Administrator) on your host machine.
+2. Run this command to force-kill all active WSL instances:
    ```powershell
    wsl --shutdown
    ```
-6. Reopen your WSL terminal, go back to your repository, and try building again:
+3. Reopen your WSL terminal, navigate back to your project directory, and run your build command:
    ```bash
-   docker compose build --no-cache
+   docker compose up --build -d
    ```
-
----
-
-### **Method 3: Quick Bypass—Disable BuildKit temporarily**
-If you are in a rush to test and want to bypass BuildKit's isolated network namespace entirely, you can force Docker to use the legacy image builder, which inherits your host's network settings directly:
-
-```bash
-DOCKER_BUILDKIT=0 docker compose build --no-cache
-```
 
 ***
 
-🐳 Let me know if Method 1 or Method 2 successfully gets your database compiling in WSL! Once you get a successful build, we can green-light Jules to start scaffold operations.
+🛠️ I recommend trying **Solution 1** first to get the database built instantly, and then applying **Solution 2** when you have a moment to permanently clean up your WSL networking. Let me know which one gets your green lights on!
