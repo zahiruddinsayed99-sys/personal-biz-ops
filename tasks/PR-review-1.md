@@ -1,3 +1,62 @@
+The base image **`postgres:16-slim`** is a highly standard, official image on Docker Hub that absolutely exists. This error means your **WSL/Docker environment is experiencing a DNS or network resolution issue** and cannot reach the Docker Hub registry (`docker.io`) to download the metadata.
+
+This is a common issue in WSL2 where the network bridge or the DNS configuration inside the Linux subsystem loses connection with the Windows host's network.
+
+Here is how to quickly diagnose and resolve this in your WSL terminal:
+
+### **Step 1: Check if WSL has Internet Connectivity**
+Run this quick curl command in your WSL terminal to see if WSL can resolve external domains:
+```bash
+curl -I https://registry-1.docker.io
+```
+*   **If it fails or hangs**, your WSL instance has lost DNS resolution. Proceed to **Step 2**.
+*   **If it succeeds** (returns an HTTP header), your internet is fine, but the Docker daemon itself is desynced. Proceed to **Step 3**.
+
+---
+
+### **Step 2: Fix WSL DNS Resolution (Most Common WSL2 Bug)**
+WSL2 dynamically generates its `/etc/resolv.conf` file, which often points to a broken local nameserver. You can override this to use a public DNS (like Google or Cloudflare):
+
+1.  **Temporarily set a public DNS:**
+    ```bash
+    sudo rm /etc/resolv.conf
+    sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+    ```
+2.  **Make this change permanent** so WSL doesn't overwrite it on reboot:
+    Create (or edit) `/etc/wsl.conf`:
+    ```bash
+    sudo nano /etc/wsl.conf
+    ```
+    Add the following lines to the file:
+    ```ini
+    [network]
+    generateResolvConf = false
+    ```
+    *(Save and exit nano: press `Ctrl+O`, `Enter`, then `Ctrl+X`)*.
+
+---
+
+### **Step 3: Restart the Docker Service**
+If your WSL internet connection is active but Docker still cannot pull, the Docker daemon's internal network state is likely stale.
+
+*   **If using Docker Desktop:** Right-click the Docker tray icon in Windows, select **Restart**, and wait for it to boot back up.
+*   **If running native Docker in WSL (without Docker Desktop):**
+    ```bash
+    sudo service docker restart
+    ```
+
+---
+
+### **Step 4: Build Again**
+Once DNS is restored or Docker is restarted, run your build command with the clean flag to pull the base image:
+```bash
+docker compose build --no-cache
+```
+
+***
+
+🌐 **If you are running a VPN or corporate proxy on your Windows host**, that can also block WSL's virtual network switch. Try temporarily disconnecting the VPN to see if the pull succeeds. Let me know which step resolves it for you!
+---
 The Docker image `pgvector/pgvector:16-pgdg` is failing to pull because that specific tag does not exist on the public Docker Hub registry. 
 
 According to your Technical Specification Document (TSD), the platform standard for the database layer is **PostgreSQL + pgvector** running on the **`16-alpine`** base version. 
