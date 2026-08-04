@@ -17,7 +17,7 @@ Once the build finishes, run your local diagnostic script to verify everything i
 ```bash
 ./verify-env.sh
 ```
-
+---
 You are officially unblocked! Once the verification script gives you all green lights, you are ready to hand over **Milestone 1** to **Jules** using the tracking branch `track/1-foundation-docker` and the copy-paste prompt we prepared. Let me know when you're ready to review Jules' first Draft PR!
 ---
 The permissions of `-rw-r--r--` are perfect, and your terminal output proves that the user `zahsay` can successfully read the file. 
