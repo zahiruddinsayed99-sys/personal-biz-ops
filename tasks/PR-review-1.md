@@ -1,109 +1,159 @@
-Now that we have successfully fixed your WSL DNS name resolution (as confirmed by your successful `curl` connection to `registry-1.docker.io` in our last exchange!), **this error is already resolved!**
-
-### **Why this error occurred**
-The `failed to resolve source metadata` error was a direct symptom of the WSL DNS block. Because WSL could not talk to the outside internet, Docker's build engine (BuildKit) was completely unable to look up or download the official `postgres:16-slim` base image. 
-
-### **What to do now**
-Since your WSL terminal can now fully resolve and connect to Docker Hub, simply clear any cached failed states and run the build command again:
-
-```bash
-# Build and launch your services in the background
-docker compose up --build -d
-```
-
-This will now cleanly pull `postgres:16-slim`, compile the `pgvector` extension locally, set up Redis, and automatically initialize your MinIO bucket.
-
-Once the build finishes, run your local diagnostic script to verify everything is listening:
-```bash
-./verify-env.sh
-```
----
-You are officially unblocked! Once the verification script gives you all green lights, you are ready to hand over **Milestone 1** to **Jules** using the tracking branch `track/1-foundation-docker` and the copy-paste prompt we prepared. Let me know when you're ready to review Jules' first Draft PR!
----
-The permissions of `-rw-r--r--` are perfect, and your terminal output proves that the user `zahsay` can successfully read the file. 
-
-The diagnostic data reveals a clear picture: **Your network routing is perfectly fine (which is why `ping 8.8.8.8` works), but outbound UDP Port 53 (DNS traffic) directly to the public internet is being dropped.** 
-
-This is incredibly common in local environments. Your local ISP, router, or Windows Defender Firewall is blocking virtual machines from sending DNS requests directly to public servers like `8.8.8.8` or `1.1.1.1`. Instead, the network forces all machines to resolve DNS through your **Windows host's internal gateway**.
-
-Here are the target actions to route around this block and get your connection restored immediately:
+You are facing two distinct, very common local setup issues: one is a workspace synchronisation gap, and the other is a networking boundary mismatch between your WSL shell and the Docker daemon. 
 
 ---
 
-### **Action 1: Route DNS through your Windows Host Gateway**
+### **Issue 1: `./verify-env.sh: No such file or directory`**
 
-Since WSL cannot talk to Google's DNS servers directly, we need to point `/etc/resolv.conf` back to your Windows host's virtual network card. Windows will intercept these queries and resolve them using its own active, working connection.
+#### **Why this happened:**
+The script `verify-env.sh` (along with `Dockerfile.db` and your updated `docker-compose.yml`) was generated and published to your **Studio panel** (the right-hand panel in your Gemini Notebook interface). Because Gemini Notebook operates in a secure cloud environment, **these files do not automatically copy themselves to your local physical WSL filesystem.** 
 
-1.  **Find your Windows Host Gateway IP** by running this command in WSL:
-    ```bash
-    ip route show | grep default | awk '{print $3}'
-    ```
-    *(This will print an IP address, typically something like `172.22.16.1` or `192.168.1.1` depending on your WSL switch configuration).*
+#### **The Fix:**
+You need to create the files locally in your WSL directory. 
 
-2.  **Unlock your resolv file:**
-    ```bash
-    sudo chattr -i /etc/resolv.conf
-    ```
+1. Navigate to your project directory in WSL:
+   ```bash
+   cd ~/projects/businesshub-ai/
+   ```
+2. Create the script file using `nano`:
+   ```bash
+   nano verify-env.sh
+   ```
+3. Copy the complete script code below and paste it into the editor:
+   ```bash
+   #!/usr/bin/env bash
+   # ==============================================================================
+   # BusinessHub AI - Local WSL Environment Verification Script
+   # ==============================================================================
 
-3.  **Overwrite `/etc/resolv.conf`** using the Gateway IP you found in Step 1:
-    ```bash
-    sudo sh -c 'echo "nameserver <REPLACE_WITH_YOUR_WSL_GATEWAY_IP>" > /etc/resolv.conf'
-    ```
+   RED='\033[0;31m'
+   GREEN='\033[0;32m'
+   YELLOW='\033[0;33m'
+   BLUE='\033[0;34m'
+   NC='\033[0m'
 
-4.  **Relock the file** to prevent WSL from overwriting it:
-    ```bash
-    sudo chattr +i /etc/resolv.conf
-    ```
+   echo -e "${BLUE}====================================================================${NC}"
+   echo -e "${BLUE}        BusinessHub AI - WSL Local Infrastructure Verifier           ${NC}"
+   echo -e "${BLUE}====================================================================${NC}"
 
-5.  **Test name resolution:**
-    ```bash
-    curl -I https://registry-1.docker.io
-    ```
+   # 1. Verify Docker Daemon is running
+   if ! docker info >/dev/null 2>&1; then
+       print_status "Docker Daemon" "FAIL" "Docker is not running. Please start Docker Desktop and ensure WSL integration is enabled."
+       exit 1
+   else
+       echo -e "[ ${GREEN}OK${NC} ] Docker Daemon: Active."
+   fi
+
+   # 2. Check running docker-compose containers
+   echo -e "\n${BLUE}Checking active Docker containers...${NC}"
+   CONTAINERS=("businesshub-db" "businesshub-redis" "businesshub-minio")
+   docker_failed=false
+
+   for container in "${CONTAINERS[@]}"; do
+       if [ "$(docker inspect -f '{{.State.Running}}' "$container" 2>/dev/null)" = "true" ]; then
+           echo -e "[ ${GREEN}OK${NC} ] Container [$container]: Running."
+       else
+           echo -e "[ ${RED}FAIL${NC} ] Container [$container]: Stopped or does not exist."
+           docker_failed=true
+       fi
+   done
+
+   if [ "$docker_failed" = true ]; then
+       echo -e "${YELLOW}Hint: Run 'docker compose up -d' to start services.${NC}"
+   fi
+
+   # 3. Verify Local TCP Port Availability (WSL localhost bindings)
+   echo -e "\n${BLUE}Verifying localhost port bindings...${NC}"
+
+   check_port() {
+       local port=$1
+       local service=$2
+       timeout 2 bash -c "</dev/tcp/127.0.0.1/$port" >/dev/null 2>&1
+       if [ $? -eq 0 ]; then
+           echo -e "[ ${GREEN}OK${NC} ] Port $port ($service): Reachable."
+       else
+           echo -e "[ ${RED}FAIL${NC} ] Port $port ($service): Unreachable."
+       fi
+   }
+
+   check_port 5432 "PostgreSQL"
+   check_port 6379 "Redis"
+   check_port 9000 "MinIO API"
+   check_port 9001 "MinIO Console"
+
+   # 4. Environment Check
+   echo -e "\n${BLUE}Verifying local configuration...${NC}"
+   if [ -f ".env" ]; then
+       echo -e "[ ${GREEN}OK${NC} ] .env file detected."
+   else
+       echo -e "[ ${YELLOW}WARN${NC} ] .env file not found in current directory. Ensure you copy env.example to .env"
+   fi
+
+   echo -e "${BLUE}====================================================================${NC}"
+   ```
+4. Save and close nano: press `Ctrl+O`, `Enter`, then `Ctrl+X`.
+5. Make it executable and test your environment:
+   ```bash
+   chmod +x verify-env.sh
+   ./verify-env.sh
+   ```
+*(Apply the exact same steps to copy your **`Dockerfile.db`** and your latest **`docker-compose-v5.yml`** (saving it as `docker-compose.yml`) from your Studio panel into your `~/projects/businesshub-ai/` directory).*
 
 ---
 
-### **Action 2: Double-Check the Location of `.wslconfig`**
+### **Issue 2: `failed to resolve source metadata for docker.io/library/postgres:16-slim`**
 
-If you configured **Mirrored Networking** in the previous step, it should have bypassed this port block entirely by tunneling DNS through Windows APIs. If it didn't, the `.wslconfig` file is likely in the wrong directory and is being ignored.
+#### **Why this happened:**
+Your WSL user terminal can now successfully resolve names (which is why your `curl` to `registry-1.docker.io` succeeded). However, **the Docker Daemon (`dockerd`) runs as an isolated system service.** 
 
-*   **.wslconfig is a Windows-level configuration file.** It must **not** be placed inside WSL (`/etc/` or `/home/zahsay`).
-*   It must live in your **Windows User Profile folder**: `C:\Users\<YourWindowsUsername>\.wslconfig`.
+If you are using **Docker Desktop for Windows**, the daemon runs inside its own utility virtual machine (typically named `docker-desktop`). **It does not inherit or read your WSL terminal's `/etc/resolv.conf` file.** It is still trying to resolve DNS using your old, broken Windows virtual network switch gateway, causing the image metadata lookup to fail.
 
-To verify or create it correctly from inside your WSL terminal:
-1.  Open the file directly on your Windows host mount (replace `<YourWindowsUsername>` with your actual Windows profile folder name):
-    ```bash
-    nano /mnt/c/Users/<YourWindowsUsername>/.wslconfig
-    ```
-2.  Ensure it contains exactly these lines:
-    ```ini
-    [wsl2]
-    networkingMode=mirrored
-    dnsTunneling=true
-    firewall=true
-    ipv6=false
-    ```
-3.  Save the file (`Ctrl+O`, `Enter`, `Ctrl+X`).
-4.  Open **Windows PowerShell** (as Administrator) and force-kill WSL to apply the changes:
-    ```powershell
-    wsl --shutdown
-    ```
-5.  Reopen WSL and run your `curl` check.
+#### **The Fix:**
+You must explicitly configure the Docker engine to use stable public DNS servers:
 
----
+##### **If you are using Docker Desktop for Windows:**
+1. Open the **Docker Desktop** graphical interface in Windows.
+2. Click the **Gear Icon (Settings)** in the top right.
+3. Select **Docker Engine** from the left-hand menu.
+4. Add the `"dns"` configuration to your settings JSON (ensuring proper comma placement). For example:
+   ```json
+   {
+     "builder": {
+       "gc": {
+         "defaultKeepStorage": "20GB",
+         "enabled": true
+       }
+     },
+     "dns": [
+       "8.8.8.8",
+       "1.1.1.1"
+     ],
+     "features": {
+       "buildkit": true
+     }
+   }
+   ```
+5. Click **Apply & restart** in the bottom right and wait for the green indicator light to turn on.
+6. Return to your WSL terminal and try compiling again:
+   ```bash
+   docker compose up --build -d
+   ```
 
-### **Action 3: Verify `/etc/nsswitch.conf`**
-
-If the Linux system's lookup configuration got altered, it might be ignoring DNS entirely.
-Run:
-```bash
-cat /etc/nsswitch.conf | grep hosts
-```
-It should output:
-```text
-hosts:          files dns
-```
-If `dns` is missing from that line, edit the file (`sudo nano /etc/nsswitch.conf`) to add it back, as this tells Linux to use `/etc/resolv.conf` for looking up hostnames.
+##### **If you run Docker native inside WSL (no Docker Desktop):**
+1. Edit the system daemon configuration:
+   ```bash
+   sudo nano /etc/docker/daemon.json
+   ```
+2. Paste this content:
+   ```json
+   {
+     "dns": ["8.8.8.8", "1.1.1.1"]
+   }
+   ```
+3. Restart the docker daemon inside WSL:
+   ```bash
+   sudo service docker restart
+   ```
 
 ***
 
-🌐 Try **Action 1** first (it's the most immediate bypass for local UDP port blocking), and let me know if your name resolution finally returns a clean HTTP response header!
+🐳 Once the Docker Engine's DNS is updated and restarted, your local compile of the PostgreSQL 16 database with the pgvector extension will complete smoothly! Let me know if you run into any further hurdles while setting up the container suite.
