@@ -1,65 +1,53 @@
-Your observation about the user change is **incredibly sharp and is almost certainly the root cause of this persistent error!**
+The diagnostic results from your terminal confirm a critical detail: **Your WSL subsystem's network and DNS are now 100% operational and healthy** (which is why `cat /etc/resolv.conf` read perfectly and `curl -I` successfully completed the handshake with Docker Hub). 
 
-Here is exactly why the mismatch between your old `root` session, your new WSL user `zahsay`, and your Docker Hub account `zahisaye` is breaking your builds—and how to fix it.
+However, the **Docker Daemon (the background engine)** is still completely cut off from the network and cannot resolve external domains. This is why it returns a `not found` error when trying to fetch the metadata for `postgres:16-slim`.
 
----
+Since you are running WSL on Windows, the Docker daemon runs inside an isolated utility virtual machine managed by **Docker Desktop**. This VM has its own independent network interface that does not automatically inherit your WSL terminal's `/etc/resolv.conf` updates.
 
-### **Why the User Mismatch Causes a "Not Found" Error**
+Here is the exact checklist to bridge the Docker daemon back to your working internet connection:
 
-1. **The Docker Hub Security Quirk (Silent 404s):** 
-   To prevent malicious actors from guessing private image names, **Docker Hub intentionally returns a `404 Not Found` error** (instead of a `401 Unauthorized`) when an authentication request is broken, expired, or invalid. This is why a highly standard public image like `postgres:16-slim` is suddenly being reported as "not found".
-2. **The Credential Helper Pipe is Broken:**
-   When you switched from `root` to `zahsay`, your new user inherited a broken or inaccessible Docker configuration. In WSL, Docker Desktop relies on a credential helper (`desktop.exe`) to share your Windows login credentials with Linux. Because you just created the user `zahsay`, this user **lacks permission to communicate with the Windows credential helper**, causing the authentication token to corrupt mid-flight and forcing Docker Hub to reject the pull with a silent `404`.
-
----
-
-### **How to Fix This in WSL (3 Quick Steps)**
-
-Run these commands in your WSL terminal under your standard **`zahsay`** user:
-
-#### **Step 1: Clear Stale/Broken Credentials**
-We need to tell Docker to forget any broken credentials and force it to pull public images anonymously.
-```bash
-# Log out of Docker Hub to clear active sessions
-docker logout
-
-# Bypass any broken credential helper files by renaming your local Docker config directory
-mv ~/.docker ~/.docker.backup
-```
-*(If the folder `~/.docker` doesn't exist for your new user, that's fine—just proceed to Step 2).*
-
-#### **Step 2: Pull the Base Image Directly**
-Before running the complex Docker Compose build, let's test if your user can pull the image directly now that the broken credentials are cleared:
-```bash
-docker pull postgres:16-slim
-```
-*   **If this succeeds:** The credential block is officially broken! Proceed to Step 3.
-*   **If it still fails:** Log in cleanly to Docker Hub with your correct username (`zahisaye`) using:
-    ```bash
-    docker login -u zahisaye
-    ```
-    Enter your Docker Hub password/token, and then run `docker pull postgres:16-slim` again.
-
-#### **Step 3: Trigger the Build Again**
-Once the base postgres image is successfully cached on your local machine, navigate to your project directory and start the build:
-```bash
-cd ~/projects/businesshub-ai/
-docker compose up --build -d
-```
+### **1. Perform a Complete Hard Restart of Docker Desktop**
+A standard terminal restart or `wsl --shutdown` does not completely restart the Docker Desktop backend application on Windows.
+1. Locate the **Docker Whale Icon** in your Windows system tray (bottom-right of your Windows taskbar).
+2. Right-click the icon and select **Restart**.
+3. Wait 1–2 minutes for the engine to boot back up and display a green "running" status.
+4. Try pulling again in WSL:
+   ```bash
+   docker pull postgres:16-slim
+   ```
 
 ---
 
-### **Bonus check: Is `zahsay` in the Docker group?**
-Since you are a newly created user, make sure you don't need to type `sudo` before every docker command. Run:
-```bash
-groups
-```
-If you do not see `docker` in the list, add your user and reload your terminal group context:
-```bash
-sudo usermod -aG docker zahsay
-newgrp docker
-```
+### **2. Enable DNS Tunneling in Docker Desktop (Highly Recommended for WSL)**
+Docker Desktop has a built-in feature designed to solve this exact issue by tunneling the VM's DNS requests directly through Windows network APIs.
+1. Open the **Docker Desktop** dashboard in Windows.
+2. Click the **Gear Icon (Settings)** in the top right.
+3. Go to **General** (or **Resources** -> **WSL Integration** depending on your version).
+4. Look for **"Use DNS Tunneling"** (or **"Turn on DNS Tunneling"**) and check the box to enable it.
+5. Click **Apply & restart**.
+6. Try pulling the image again in your WSL terminal.
+
+---
+
+### **3. Check the Windows Virtual Ethernet Adapter**
+Sometimes Windows disables or misconfigures the virtual switch that WSL and Docker use to talk to your physical network.
+1. On your Windows host, search for and open **Network Connections** (or run `ncpa.cpl`).
+2. Look for an adapter named **vEthernet (WSL)** or **vEthernet (Default Switch)**.
+3. If it is disabled (greyed out), right-click it and select **Enable**.
+4. If it is enabled, right-click it, select **Disable**, wait 5 seconds, and then select **Enable** to force a hardware reset on the virtual bridge.
+
+---
+
+### **4. Clear Stale Network Filters (The Last Resort)**
+If the Docker network state is corrupted, resetting Docker Desktop's database and network configurations will resolve it:
+1. In the **Docker Desktop** dashboard, click the **Troubleshoot (Bug Icon)** in the top right header.
+2. Select **Clean / Purge data** and check "WSL Integration" / "Containers".
+3. If that still fails, select **Reset to factory defaults** from the same screen. 
+4. Once restarted, run your pull command:
+   ```bash
+   docker pull postgres:16-slim
+   ```
 
 ***
 
-🐳 Give **Step 1 and Step 2** a shot! Let me know if `docker pull postgres:16-slim` successfully downloads the image. Once it does, we are completely in the clear to build!
+🐳 Let's try **Step 1 and Step 2** first (DNS Tunneling in Docker Desktop settings is the most common fix for this specific Docker daemon network disconnect). Let me know as soon as the pull command successfully retrieves the layers!
