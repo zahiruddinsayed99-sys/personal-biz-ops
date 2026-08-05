@@ -1,7 +1,100 @@
-Here is the official, production-grade handoff prompt to give to **Jules / Antigravity** to begin coding **Milestone 4 (Multi-Tenant Onboarding & User Services)**.
+## Hinglish
+Ye lo Milestone 4 (Multi-Tenant Onboarding & User Services) code karne ke liye **Jules / Antigravity** ko dene wala official, production-grade handoff prompt — pure **Hinglish** (with exact technical terms intact) mein translated:
 
-This prompt is mapped directly to our core system contracts, functional requirements, and folder conventions, ensuring that the multi-entity registration endpoint is executed as a single, atomic ACID transaction.
+---
 
+### 📋 Copy-Paste Prompt for Jules / Antigravity
+
+**USER_REQUEST:**
+
+Humne `develop` branch par **Milestone 3 (Core Security & Multi-Tenant Framework)** successfully complete aur verify kar liya hai.
+
+Aapka goal **Milestone 4** ke liye Multi-Tenant Self-Service Onboarding aur User Management Services build karna hai, jismein database interactions ko **Async SQLAlchemy 2.0 Repositories** par shift karna hai aur ek unified, transaction-isolated registration pipeline implement karni hai.
+
+Please niche diye gaye tasks complete karein:
+
+#### 1. GIT BRANCH & WORKFLOW
+
+* **New Branch:** `develop` branch se off ho kar ek nayi local feature branch create karein aur uspar switch karein, jiska exact naam ho: `track/4-tenant-onboarding`
+* **Strict Human-in-the-Loop Guidelines:** Direct `main` ya `develop` par push karne ki bilkul koshish na karein. Sabhi deliverables **Draft Pull Request** ke liye prepared hone chahiye.
+* **Commit Messages:** Sabhi commit messages **Conventional Commits** specification follow karne chahiye (e.g., `"feat(auth): implement unified multi-tenant onboarding with async repositories"`).
+
+---
+
+#### 2. DATA TRANSFER SCHEMAS (Pydantic v2)
+
+`backend/app/schemas/auth.py` (ya ek dedicated schema package) ke andar:
+
+* **Onboarding Request Payload Schema create karein (e.g., `OnboardTenantRequest`):**
+* **Organization Fields:** `name` (`str`, 3-100 chars), `slug` (`str`)
+* **User Fields:** `email` (`str`), `password` (`str`, minimum 8 characters), `full_name` (`str`)
+
+
+* **Input Parameters par strict validation rules enforce karein:**
+* Email ka format valid hona chahiye (e.g., Pydantic `EmailStr`) aur woh globally unique hona chahiye.
+* Organization ka Slug sirf lowercase alphanumeric aur dashes ke sath hona chahiye, aur length 3 se 30 characters ke beech honi chahiye. Regex constraint: `^[a-z0-9-]{3,30}$`
+* Agar validation fail hoti hai, toh HTTP `422` ke sath system error code `ERR_VALIDATION_001` return karein.
+
+
+
+---
+
+#### 3. ASYNC DATABASE REPOSITORIES
+
+Database queries ko raw inline endpoints se hata kar dedicated repository classes mein migrate karein:
+
+* **`backend/app/repositories/organization_repository.py` create karein:**
+* Organization ko save karne aur ID ya slug ke base par query karne ke liye async methods implement karein.
+
+
+* **`backend/app/repositories/user_repository.py` create karein:**
+* User ko save karne, ID ke base par query karne, aur email ke base par query karne ke liye async methods implement karein.
+
+
+* **Async Syntax Only:** Ensure karein ki sabhi repositories exclusively **Async SQLAlchemy 2.0** select aur execute syntax (e.g., `select()`, `execute()`) ka hi use karein. Legacy `session.query()` use karna strictly forbidden hai.
+
+---
+
+#### 4. UNIFIED SELF-SERVICE ONBOARDING PIPELINE (`POST /api/v1/auth/onboard`)
+
+Functional requirement **FR-CORE-01** ko follow karte hue registration endpoint `POST /api/v1/auth/onboard` create karein:
+
+* Ye endpoint **public** hona chahiye (tenant isolation middleware ko bypass kare).
+* **Atomic ACID Transaction Guarantee:** Database operations ko ek single async database transaction context (e.g., `async with db.begin():`) ke andar wrap karein. Is single transaction ke andar ye actions execute karein:
+1. Email aur organization slug ki uniqueness verify karein. Agar donon mein se koi bhi exist karta hai, toh HTTP `400` ya HTTP `409` raise karein aur roll back kar dein.
+2. `Organization` record create aur persist karein.
+3. Password ko hash karein aur `User` record create karein.
+4. Newly created organization ke andar user ko `user_roles` junction table mein record insert karke `'TENANT_OWNER'` ka role assign karein.
+
+
+* *Note: Agar koi bhi step fail hota hai, toh database strictly completely roll back hona chahiye — ensure karein ki koi bhi partial ya orphaned records write na hon.*
+
+
+* **Automated Authentication Context:** Successful database transaction commit hone par, automatically ye actions perform karein:
+1. User details aur active role ke sath ek valid **RS256 JWT Access Token** (15-min expiry) generate karein.
+2. Key pattern `sess:{user_id}:{token_id}` par 7-day TTL ke sath ek active stateful **Redis session** create karein.
+3. **Refresh Token** (7-day expiry) ko strictly ek secure, `HttpOnly`, `SameSite=Strict` cookie mein inject karein.
+4. Hamare standard system contract envelope se match karta hua ek `201 Created` response return karein.
+
+
+
+---
+
+#### 5. INTEGRATION TESTING GATES
+
+`backend/tests/test_onboarding.py` mein robust integration tests write karein jo ye assert karein:
+
+* Successful onboarding database records create karta hai, Redis session register karta hai, aur authentication cookies/payload return karta hai.
+* Invalid slug payloads ya duplicate emails ke case mein database transaction cleanly roll back ho jata hai (verify karein ki koi orphaned organizations ya users write na hue hon).
+* Invalid schema inputs standard HTTP `422` throw karte hain jismein `'ERR_VALIDATION_001'` error code present ho.
+
+Jab kaam complete ho jaye, toh verify karein ki sabhi tests locally pass ho rahe hain (`pytest -v`), apne work ko `track/4-tenant-onboarding` branch par commit karein, aur architectural review ke liye ek **Draft Pull Request** submit karein.
+
+---
+
+Ye prompt self-service onboarding, transaction handling, aur repository patterns ki exact specifications ko Jules ke liye clear steps mein translate karta hai.
+
+📊 **Ek baar jab Jules onboarding endpoint complete kar le, toh kya aap chahenge ki main frontend Angular interceptor ka ek template outline karun jo outbound API requests mein automatically active tenant ID inject kare?**
 ***
 
 ### 📋 Copy-Paste Prompt for Jules / Antigravity
