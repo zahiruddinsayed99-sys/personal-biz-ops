@@ -1,0 +1,207 @@
+## Jules testing steps
+--p-------
+## gemini response
+Here is the comprehensive **End-to-End Testing & QA Verification Guide** for Milestone 6. This structured test plan translates your finalized architecture—including Indian GST compliance, RBI e-Mandate rules, 3-State Redis locking, and atomic metering—into actionable test steps for your developers and QA team.
+
+---
+
+## **Phase 1: Database & Migration Verification**
+
+### **1.1 Alembic Migration Safety Check**
+
+* **Action:** Run the forward migration to upgrade the database schema, then immediately run a downgrade test.
+
+
+* **Commands:**
+```bash
+alembic upgrade head
+alembic downgrade -1
+alembic upgrade head
+
+```
+
+
+* **Expected Result:** Zero errors during execution. Existing tenant records remain intact, and downgrades cleanly drop the new columns (`gstin`, `billing_state`, `subscription_tier`, etc.) without altering core organization metadata.
+
+
+
+### **1.2 Tenant Seed Defaults**
+
+* **Action:** Provision a new organization and query its default billing state in PostgreSQL.
+
+
+* **Expected Result:**
+* `subscription_tier` == `'FREE'`
+
+* `subscription_status` == `'INACTIVE'`
+
+* `currency` == `'INR'`
+
+* `ai_credits_used` == `0` and `bonus_ai_credits` == `0`
+
+
+
+
+---
+
+## **Phase 2: India Compliance & Stripe Checkout API Gates**
+
+### **2.1 RBAC Authorization Guard (`POST /api/v1/billing/checkout`)**
+
+* **Action:** Send an HTTP POST request to `/api/v1/billing/checkout` using an authenticated session with a standard `MEMBER` or non-owner role.
+
+
+* **Expected Result:** The API immediately rejects the request with **HTTP 403 Forbidden** and error code **`ERR_RBAC_001`**, proving that only users with the `tenant:billing` permission (`TENANT_OWNER`) can initiate billing actions.
+
+
+
+### **2.2 INR, 3D Secure & GSTIN Payload Verification**
+
+* **Action:** Initiate a checkout session as a `TENANT_OWNER` for an organization seeded with a valid `gstin` and `billing_state`.
+
+
+* **Expected Result:**
+* A Stripe Customer is dynamically created (if missing) and saved to `stripe_customer_id`.
+
+
+* The generated Stripe Checkout Session payload explicitly enforces:
+* Currency set to **`INR`**.
+
+
+* **RBI e-Mandate Compliance:** Card authentication set to `request_three_d_secure: "any"`.
+
+
+* **Promotions:** `allow_promotion_codes=True`.
+
+
+* **18% GST:** Stripe Tax is enabled (`automatic_tax={"enabled": True}`) or the customer GSTIN is correctly mapped to the invoice tax parameters.
+
+
+
+
+
+
+
+---
+
+## **Phase 3: Webhook Resilience, 3-State Redis Lock & Out-of-Order Guard**
+
+| Test Case | Test Action | Expected System Response |
+| --- | --- | --- |
+| **3.1 Signature Spoofing**<br> | Send a POST request to `/api/v1/billing/webhooks` with an invalid or missing `Stripe-Signature` header.
+
+ | Rejects payload immediately with **HTTP 401 Unauthorized**.
+
+ |
+| **3.2 Duplicate Event Idempotency**<br> | Send the exact same valid webhook payload (`event_id: evt_123`) twice in rapid succession.
+
+ | **First request:** Processes DB update and sets Redis key `stripe_evt:evt_123` with a 24-hour TTL.
+
+<br>
+
+<br>**Second request:** Redis lock blocks execution and returns **HTTP 200 OK** without running duplicate SQL writes.
+
+ |
+| **3.3 Out-of-Order Delivery**<br> | Send a webhook event where the Stripe `created` timestamp is older than the stored `last_billing_event_ts`.
+
+ | Backend detects the older timestamp, ignores the payload, and returns **HTTP 200 OK** without reverting database state.
+
+ |
+| **3.4 DB Failure Recovery**<br> | Send a valid webhook payload, but intentionally mock/force a PostgreSQL transaction failure.
+
+ | The temporary lock `stripe_lock:{event_id}` is deleted, and the endpoint returns **HTTP 500** so Stripe's automated retry can succeed once the DB recovers.
+
+ |
+
+---
+
+## **Phase 4: Atomic Usage Metering & Soft-Lock Overage Policy**
+
+### **4.1 Concurrent AI Credit Race Condition (TOCTOU Test)**
+
+* **Test Setup:** Seed a tenant on the `FREE` tier with `100` credit limit, `bonus_ai_credits = 0`, and `ai_credits_used = 90` (10 credits remaining).
+
+
+* **Action:** Fire **10 simultaneous asynchronous requests** to an AI platform endpoint where each execution costs **5 credits**.
+
+
+* **Expected Result:**
+* The atomic SQL check-and-increment query (`UPDATE ... RETURNING id`) executes safely.
+
+
+* Exactly **2 requests succeed** (bringing `ai_credits_used` to `100`).
+
+
+* Exactly **8 requests fail** with **HTTP 402 Payment Required** and code **`ERR_BILLING_001`**.
+
+
+* The database `ai_credits_used` counter never exceeds `100`.
+
+
+
+
+
+### **4.2 Downgrade Soft-Lock Overage Enforcement**
+
+* **Test Setup:** Seed an organization with `subscription_tier = 'FREE'` and **5 active users** (simulating a tenant downgraded from `PRO` where seats > 3).
+
+
+* **Action:**
+1. Have an existing user log in and perform a standard read/write workspace operation.
+
+
+2. Have the `TENANT_OWNER` call `POST /api/v1/users/invite` to invite a 6th user.
+
+
+
+
+* **Expected Result:**
+* **Existing User:** Works normally; data and access are preserved.
+
+
+* **New Invite Request:** Blocked immediately with **HTTP 402 Payment Required (`ERR_BILLING_001`)** until active seats drop to 3 or fewer.
+
+
+
+
+
+---
+
+## **Phase 5: Angular UI & B2B GSTIN Verification**
+
+### **5.1 GSTIN Alphanumeric Form Validation**
+
+* **Action:** On the Angular Standalone Billing Dashboard, input invalid GSTIN strings (e.g., too short, special characters, wrong state code prefix) into the B2B tax profile form.
+
+
+* **Expected Result:** The form synchronously blocks submission and displays a validation error until a valid **15-character alphanumeric Indian GSTIN regex** is entered.
+
+
+
+### **5.2 Reactive Signals & Soft-Lock UI Warning**
+
+* **Action:** Load the Billing Dashboard for a tenant currently in a Soft-Lock Overage state (e.g., 5/3 seats used on Free).
+
+
+* **Expected Result:**
+* Angular Signals correctly render the usage meters (**5/3 Seats**, **100/100 AI Credits**).
+
+
+* A persistent warning banner renders on screen indicating that the organization is over seat limits and must remove members or upgrade to invite new users.
+
+
+* Clicking **"Upgrade Now"** successfully redirects the browser to the Stripe INR Checkout Session.
+---
+I have successfully implemented all core functionality for Milestone 6: Billing & Subscription Engine.
+
+Progress summary:
+
+Database & Migrations: Extended Organization model and created an Alembic migration (f11b765917c6) for Stripe fields (subscription_tier, stripe_customer_id, gstin, etc.).
+Backend API: Added POST /api/v1/billing/checkout and /api/v1/billing/portal enforcing INR pricing, 3D Secure, and Stripe Tax handling with GSTIN.
+Webhooks & Idempotency: Implemented POST /api/v1/billing/webhooks with 3-State Redis Locking, out-of-order delivery protection, and atomic state updates on subscription status/tier changes.
+Atomic Usage Metering: Added consume_ai_credits_br_plt_002 dependency using atomic check-and-increment and check_soft_lock_overage middleware (wired to Invites and CRM ops to enforce downgrade soft-locks).
+Frontend: Created standalone BillingDashboardComponent using Angular Signals, hooked it up to the API, and properly registered it in router. Also fixed some unrelated errors in the existing CRM component causing build failures.
+Tests: Added test_billing_integration.py to cover all tests mentioned in instructions.
+I am currently working on making sure pytest -v runs without any errors on the entire suite (there are a couple of fixture errors in my new test file from previous fixture scopes).
+
+Do you have any feedback or additional tasks before I resolve the test setup issues, complete the pre-commit checks, and open the draft PR?
