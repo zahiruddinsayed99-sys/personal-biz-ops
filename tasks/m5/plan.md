@@ -1,3 +1,72 @@
+Yeh raha aapke architectural evaluation aur 4 targeted refinements ka **Hinglish** translation:
+
+---
+
+Yeh technical layout **exceptionally well-architected** hai. Isne hamare purane "A-Lite" concept ko actual mein upgrade kar diya hai: ek simple backend seed script ke bajaye, aapne ek **true, production-grade invitation engine** (`invitations` table + `/auth/invite/accept` transaction) design kiya hai jo team onboarding aur CRM pipeline ko seamlessly bridge karta hai.
+
+Isse lock-in karne aur Jules ke liye final handoff prompt likhne se pehle, yahan **4 targeted architectural refinements** hain jo aapke database schema, security boundaries, aur UI state handling ko bilkul bulletproof bana denge:
+
+---
+
+### **1. Security Refinement: Horizontal Tenant Isolation par 404 vs. 403**
+
+* **Current Specification:** *"User A from Org 1 attempts to PATCH a deal belonging to Org 2, resulting in an immediate `ERR_TENANT_001` (403 Forbidden)."*
+* **Architectural Recommendation:** Expected HTTP response ko **403 Forbidden** se badal kar **404 Not Found** (`ERR_NOT_FOUND_001`) kar dein jab queries `organization_id == current_tenant_id` check fail karti hain.
+* **Why (Kyun):** `403 Forbidden` return karne se metadata leak hota hai—yeh attacker ko confirm karta hai ki specific UUID kisi doosre tenant ke database mein exist karta hai. SQL queries ko strictly `WHERE organization_id = :tenant_id AND id = :deal_id` ke saath scope karke, kisi bhi out-of-tenant UUID ko ek non-existent record ki tarah hi behave karna chahiye (**404 Not Found**).
+* *Note: **403 Forbidden** (`ERR_RBAC_001`) sirf Vertical Isolation failures ke liye use karein (jaise ki, Org 1 ka koi `DOMAIN_MEMBER` Org 1 ke hi kisi deal ko delete karne ki koshish kare).*
+
+
+
+---
+
+### **2. Database Refinement: Composite Indexes & Schema Consistency**
+
+Yeh ensure karne ke liye ki Kanban board hazaron records hone ke baad bhi $50\text{ ms}$ ke andar load ho, explicitly **composite indexes** define karein aur ek minor column-naming conflict ko fix karein:
+
+| Table | Recommended Index / Constraint | Engineering Rationale |
+| --- | --- | --- |
+| `crm_deals` | **Composite Partial Index:**<br>
+
+<br>`(organization_id, stage) WHERE deleted_at IS NULL` | Kanban boards deals ko per-tenant stage ke hisaab se group karke query karte hain. Yeh index board rendering ke dauran full-table scans ko rokta hai. |
+| `crm_deals` | **Field Naming Alignment:**<br>
+
+<br>`value_amount` ya `value` mein se koi ek canonical name standardize karein | Aapke purane Pydantic schema mein `value_amount` (Decimal) use hua tha, jabki is DDL mein `value` (NUMERIC) likha hai. DDL, Pydantic, aur Angular models ke across koi ek canonical name standardize kar lein. |
+| `invitations` | **Partial Unique Constraint:**<br>
+
+<br>`(organization_id, email) WHERE accepted_at IS NULL` | Yeh admins ko galti se same tenant ke andar ek hi email ID par multiple active invite tokens spam karne se rokta hai. |
+
+---
+
+### **3. Security Refinement: `invitations` mein Token Hashing**
+
+* **Current Specification:** *"`token` (VARCHAR, Unique, Not Null — cryptographically secure hash)."*
+* **Architectural Recommendation:** Explicitly clarify karein ki database column ka naam **`token_hash`** (`VARCHAR(64)` SHA-256 ke liye) hona chahiye, aur raw plaintext URL token **kabhi bhi DB mein save (persist) na ho**.
+* **Flow:**
+1. `POST /api/v1/organizations/invitations` ek random URL-safe plaintext token generate karta hai, SHA-256 ke through usko hash karta hai, DB mein `token_hash` store karta hai, aur API response/email mein **plaintext token** return karta hai.
+2. `POST /api/v1/auth/invite/accept` plaintext token receive karta hai, uska SHA-256 hash compute karta hai, aur query run karta hai: `WHERE token_hash = :hashed_input AND expires_at > now() AND accepted_at IS NULL`.
+
+
+
+---
+
+### **4. Frontend Refinement: Optimistic UI Rollback (Angular Signals)**
+
+* **Current Specification:** *"Dragging a deal card to a new column instantly updates the local reactive state using Angular Signals and transmits a debounced patch request..."*
+* **Architectural Recommendation:** Frontend specification mein explicitly **Optimistic UI with Rollback** pattern requirement add karein.
+* **Why (Kyun):** Agar koi user card ko `PROPOSAL` se `WON` par drag karta hai, toh fast UX ke liye UI turant update hona chahiye. Lekin agar backend `PATCH /api/v1/crm/deals/{id}/stage` fail ho jata hai (jaise network issue ya RBAC permission error ki wajah se), toh Angular Signal store **ko us error ko catch karna hoga aur automatically card ko wapas uske original column mein revert karna hoga** saath me ek toast notification display karke.
+
+---
+
+### **Adjusted Automated Test Expectations ka Summary**
+
+| Scenario | Expected HTTP Status / Error Code |
+| --- | --- |
+| **Cross-Tenant Access (Horizontal)** | `404 Not Found` (`ERR_NOT_FOUND_001`) |
+| **Member Modifies Another's Deal** | `403 Forbidden` (`ERR_RBAC_001`) |
+| **Member Deletes Any Deal** | `403 Forbidden` (`ERR_RBAC_001`) |
+| **Duplicate Pending Invitation** | `409 Conflict` (`ERR_INVITE_001`) |
+| **Expired/Invalid Invite Accept** | `400 Bad Request` (`ERR_TOKEN_001`) |
+---
 ### **Architectural Review & Endorsement: Approved**
 
 The **"Path B + A-Lite Hybrid"** strategy for **Milestone 5** is an exceptionally mature and elegant architectural decision. 
