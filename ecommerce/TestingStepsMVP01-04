@@ -1,0 +1,89 @@
+Here is your step-by-step **Local Testing Guide** to verify all implemented fixes and features on your local machine:
+
+---
+
+### 🚀 **Prerequisite: Start Local Backend & Frontend Services**
+
+#### **1. Start Backend (FastAPI)**
+In your terminal:
+```bash
+cd backend
+source venv/bin/activate
+uvicorn app.main:app --reload --port 8000
+```
+- **Verification**: Open `http://localhost:8000/docs` in your browser. You will see Swagger UI with the new `Admin Dashboard` endpoint group.
+
+#### **2. Start Frontend (Angular 19)**
+In a second terminal:
+```bash
+cd frontend/ecommerce-frontend
+npm start
+```
+- **Verification**: Frontend dev server starts at `http://localhost:4200`.
+
+---
+
+### 🧪 **Local Test Suites**
+
+#### **Test Suite 1: Root URL Redirect & Auth Guards (`http://localhost:4200`)**
+1. **Unauthenticated Visit**:
+   - Open an Incognito browser window and navigate to `http://localhost:4200/`.
+   - ✅ **Expected Result**: `rootGuard` intercepts and immediately redirects your browser to `http://localhost:4200/login`.
+2. **Authenticated Visit to `/login`**:
+   - Log in with user credentials.
+   - Now type `http://localhost:4200/login` directly into your browser address bar.
+   - ✅ **Expected Result**: `guestGuard` intercepts and routes you directly to `http://localhost:4200/products`.
+
+---
+
+#### **Test Suite 2: Dark / Light Mode Theme Engine**
+1. **Navbar Theme Toggle**:
+   - Look at the top navigation bar header.
+   - Click the Sun/Moon icon button (`light_mode` / `dark_mode`) on the top right.
+   - ✅ **Expected Result**: The entire UI smoothly transitions between Light Mode (`#f8fafc` background) and Dark Mode (`#0b0f19` background) with updated card colors, text, inputs, and Material component styling.
+2. **Theme Persistence**:
+   - Switch to **Dark Mode** and press `F5` / `Ctrl+R` to refresh the page.
+   - ✅ **Expected Result**: Dark Mode remains active without any flickering (persisted in `localStorage`).
+3. **Login Screen Toggle**:
+   - Click the floating Theme button in the top-right corner of the login screen to toggle themes before logging in.
+
+---
+
+#### **Test Suite 3: Checkout Shipping Address Serialization (MVP-001)**
+1. **Fill Checkout Form**:
+   - Log in, add an item to your cart from `/products`, and proceed to `http://localhost:4200/checkout`.
+   - Fill in the Shipping Address form fields:
+     - **Address Line 1**: `123 Main Street`
+     - **Address Line 2**: `Suite 4B`
+     - **City**: `Springfield`
+     - **State**: `IL`
+     - **PIN Code**: `62701`
+2. **Inspect Payload**:
+   - Open Browser DevTools (`F12` ➔ **Network** tab).
+   - Click **Place Order**.
+3. ✅ **Expected Result**:
+   - The `POST /api/v1/orders` request payload contains properly serialized address string:
+     ```json
+     {
+       "items": [{"product_id": "...", "quantity": 1}],
+       "shipping_address": "123 Main Street, Suite 4B, Springfield, IL - 62701"
+     }
+     ```
+   - FastAPI returns **`201 Created`** without throwing a `422 Unprocessable Entity` validation error!
+
+---
+
+#### **Test Suite 4: Product Catalog Inline SVG Fallback (MVP-004)**
+1. Navigate to the Product Catalog (`http://localhost:4200/products`).
+2. Look at product cards that do not have an image URL.
+3. ✅ **Expected Result**: Cards render a styled SVG illustration container featuring a package icon and uppercase `"NO IMAGE"` label instead of an empty gray square block.
+
+---
+
+#### **Test Suite 5: Admin Dashboard Live KPI Aggregations (MVP-002 & MVP-003)**
+1. **Swagger API Verification**:
+   - Open `http://localhost:8000/docs` and execute `GET /api/v1/admin/dashboard`.
+   - ✅ **Expected Result**: Returns `200 OK` JSON with aggregated Total Revenue, Active Products count, Total Orders count, and recent orders from PostgreSQL.
+2. **Frontend UI Binding**:
+   - Log in as Admin and navigate to `http://localhost:4200/dashboard`.
+   - ✅ **Expected Result**: The frontend dashboard renders live metric cards and recent order tables streamed directly from backend database queries via `DashboardService`.
