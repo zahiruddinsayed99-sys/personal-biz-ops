@@ -1,7 +1,24 @@
-Setting up a custom domain email (`hello@solvexa.com`) is one of the highest ROI tasks you can do. It instantly elevates you from a "freelancer" to a "business," and doing it via Zoho Mail + Cloudflare gives you enterprise-grade reliability for exactly zero dollars.
+### 1. Porkbun (The Best Overall Choice for `.in`)
 
-Here is the exact, step-by-step technical guide to bypass the Google Workspace fees and configure everything perfectly.
+Since Cloudflare is out, Porkbun is your absolute best option for a `.in` domain.
 
+* **The Cost:** They consistently offer one of the lowest, most transparent prices for `.in` domains (usually around $4 to $6 for the first year, with very reasonable, transparent renewals).
+* **The Perks:** They include free WHOIS privacy and free SSL, and their dashboard is incredibly easy to use. You can still manage your DNS through Cloudflare for free—you just use Porkbun as your registrar.
+
+### 2. BigRock or GoDaddy (The "First Year Promo" Route)
+
+If you want to spend the absolute minimum *right now* and are okay with paying more later, Indian registrars offer massive first-year discounts.
+
+* **The Cost:** BigRock and GoDaddy frequently run promos where you can get a `.in` domain for ₹1 or ₹99 for the first year.
+* **The Catch:** To get the ₹1 deal, you often have to commit to a 2 or 3-year term, and the subsequent years are billed at a much higher rate (around ₹899/year). They also charge extra for WHOIS privacy protection, which Porkbun includes for free.
+
+### The Recommended Setup
+
+To get the best of both worlds (cheap domain + enterprise features):
+
+1. Buy your `.in` domain at **Porkbun** for transparent, low-cost pricing.
+2. Change the nameservers in Porkbun to point to **Cloudflare**.
+3. Manage all your DNS records inside Cloudflare for free, which will allow you to easily set up your zero-cost Zoho Mail and host your Angular frontend on Cloudflare Pages.
 ---
 
 ### Step 1: Claim the Zoho "Forever Free" Plan
