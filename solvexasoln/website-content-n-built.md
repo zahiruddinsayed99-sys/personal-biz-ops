@@ -86,3 +86,24 @@ You can still use your Angular setup, but soften the visual design:
 * **Imagery:** Avoid code snippets or abstract tech grids. Use high-quality illustrations of people collaborating, checklists being completed, or clean, simplified mockups of a dashboard on an iPad.
 
 This approach lowers the barrier to entry. It makes local business owners feel comfortable reaching out to you because you sound like a helpful guide, not an intimidating tech corporation.
+---
+Here are three "small problem, huge relief" solutions that fit perfectly into your new, approachable tone. These are highly relatable pain points for small businesses, and incorporating the **Solvexa** (Solving the 'X' factor in business) brand name makes them feel like signature offerings.
+
+You can add these as a special section on your website under a heading like: **"The Solvexa Quick-Wins"**
+
+**1. The WhatsApp Lead Catcher**
+
+* **The Annoyance:** Missing out on potential customers because you were too busy or asleep to reply to their WhatsApp inquiry.
+* **The Solvexa Solution:** We build a friendly automated assistant that instantly replies to new inquiries, answers basic FAQs, and collects their contact details 24/7. *The Relief: You never lose a warm lead to a competitor again, and you wake up to a neat list of ready-to-buy customers.*
+
+**2. Pain-Free Document Collection**
+
+* **The Annoyance:** Hunting through months of messy WhatsApp chats to find a client's GST certificate, PAN card, or signed agreement.
+* **The Solvexa Solution:** We create a simple, secure upload link for your business. Clients drop their files in, and the system automatically renames and sorts them into neatly organized folders on your drive. *The Relief: Zero lost files, total privacy, and the end of scattered digital paperwork.*
+
+**3. The "No-Show" Eliminator**
+
+* **The Annoyance:** Playing "scheduling ping-pong" (Are you free Tuesday at 3? No, how about Thursday?) and dealing with clients who forget their appointments.
+* **The Solvexa Solution:** We set up a smart booking link tied to your actual availability, complete with automated WhatsApp or SMS reminders sent 24 hours before the meeting. *The Relief: Total control of your calendar, zero double-bookings, and a massive drop in wasted time from no-shows.*
+
+These solutions are brilliant because they require relatively low development effort using your Python/FastAPI and automation stack, but to a small business owner, they feel like pure magic!
