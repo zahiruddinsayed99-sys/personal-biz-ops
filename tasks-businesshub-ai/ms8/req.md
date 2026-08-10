@@ -1,3 +1,173 @@
+### **GitHub Milestone Details**
+
+**Title:** Milestone 8: CRM AI Copilot & Lead Scoring
+**Description:**
+
+> This milestone concludes Module 2 (CRM Engine) by bringing it to 100% completion. The goal is to integrate our CRM Kanban Pipeline with the newly established Centralised AI Platform (Milestone 7) to deliver secure, multi-tenant AI Lead Scoring and Draft Follow-Up capabilities (`FR-CRM-02`). All AI operations must enforce strict horizontal multi-tenant isolation, atomic credit metering, and soft-lock protection.
+> 
+> 
+
+---
+
+### **GitHub Issues (Copy-Paste Ready)**
+
+#### **Issue 1: Alembic Schema Migration for CRM AI Metadata Fields**
+
+**Title:** `feat(db): Alembic schema migration for CRM AI metadata fields`
+**Labels:** `backend`, `database`, `milestone-8`
+**Description:**
+Extend the `crm_deals` table with dedicated columns to persist AI-generated lead scores, intent signals, and historical audit timestamps to support AI analytics on our sales pipeline.
+
+**Tasks:**
+
+* Add the following columns to `crm_deals` via a new Alembic migration:
+
+
+* `lead_score` (INTEGER, Nullable) — stores the AI-calculated score (0–100).
+
+
+* `intent_signals` (JSONB, Nullable) — stores structured lists of intent markers (e.g., `["high_email_engagement", "pricing_page_visit"]`).
+
+
+* `last_scored_at` (TIMESTAMPTZ, Nullable) — prevents redundant scoring runs and guides cache-invalidation.
+
+
+
+
+* Create a partial database index on `crm_deals(organization_id, lead_score) WHERE deleted_at IS NULL` to support fast high-value lead filtering on corporate dashboards.
+
+
+
+**Definition of Done:**
+
+* [ ] Migration script runs cleanly on `alembic upgrade head` and rolls back on `alembic downgrade -1`.
+
+
+* [ ] Database schema verified with automated test assertions ensuring columns are successfully added to newly provisioned deals.
+
+
+
+---
+
+#### **Issue 2: Centralised AI Gateway Prompt Templates & Celery Lead Scoring Task**
+
+**Title:** `feat(ai): Centralised AI Gateway prompt templates & Celery lead scoring task`
+**Labels:** `backend`, `ai`, `milestone-8`
+**Description:**
+Implement the asynchronous background Celery task `crm.calculate_lead_score` to query CRM contact histories and generate structured lead scores through our centralized AI Gateway.
+
+**Tasks:**
+
+* Register two new system prompt templates in `backend/app/domain/ai/prompts/`:
+
+
+* `lead_scoring_v1`: Evaluates unstructured contact notes/history and outputs a JSON containing a `score` (0–100) and an array of `intent_signals` (max 5 strings).
+
+
+* `crm_followup_v1`: Drafts professional, contextually grounded follow-up emails in INR-pricing terms.
+
+
+
+
+* Implement the `crm.calculate_lead_score` Celery background task:
+
+
+* Query historical contacts and notes linked to the deal's `contact_id`, strictly bounded by the `organization_id`.
+
+
+* Call the `AiGatewayService` using the `lead_scoring_v1` prompt template.
+
+
+* Persist the score and JSON array back to PostgreSQL inside an async transaction.
+
+
+
+
+* Acquire a Redis idempotency lock: `ai_lock:score:{deal_id}` with a 2-minute TTL to prevent double-spend credit issues.
+
+
+
+**Definition of Done:**
+
+* [ ] Registered structured JSON prompt templates `lead_scoring_v1` and `crm_followup_v1`.
+
+
+* [ ] Celery task successfully executes, locks runs via Redis, catches transient provider errors, and commits scores back to the database within strict tenant isolation filters.
+
+
+
+---
+
+#### **Issue 3: CRM AI Copilot REST API Endpoints with Atomic Pre-Flight Metering**
+
+**Title:** `feat(api): CRM AI Copilot REST API endpoints with atomic pre-flight metering`
+**Labels:** `backend`, `api`, `milestone-8`
+**Description:**
+Expose the AI CRM endpoints, enforcing strict vertical RBAC, soft-lock gates, and pre-flight atomic credit checks to prevent billing overages.
+
+**Tasks:**
+
+* Expose `POST /api/v1/crm/deals/{id}/ai-score` to trigger the Celery task.
+
+
+* Expose `POST /api/v1/crm/deals/{id}/draft-followup` to return the personalized email draft.
+
+
+* Require `crm:write` permission for all endpoints.
+
+
+* Wrap endpoints in the pre-flight billing verification middleware (`BR-PLT-002`).
+
+
+* Reject requests with `ERR_BILLING_001` (HTTP 402) if the organization is in a Soft-Lock Overage state (downgraded to Free but holding > 3 active users).
+
+
+* Deduct 5 AI Credits atomically via the SQL check-and-increment query prior to external model dispatch. Return HTTP 402 if zero rows are updated.
+
+
+
+**Definition of Done:**
+
+* [ ] API routes verified to return standard JSON wrappers with correct HTTP codes.
+
+
+* [ ] Pytest suites confirm that unauthenticated, soft-locked, or credit-exhausted tenants are blocked with `ERR_BILLING_001` (HTTP 402) prior to external model calls.
+
+
+
+---
+
+#### **Issue 4: Angular Kanban UI AI Copilot Actions & Signal Polling Integration**
+
+**Title:** `feat(ui): Angular Kanban AI Copilot actions & Signal polling integration`
+**Labels:** `frontend`, `ui`, `milestone-8`
+**Description:**
+Integrate AI scoring and email drafting tools into our Angular Kanban interface. Leverage Signals to handle optimistic state changes and poll Celery execution records reactively.
+
+**Tasks:**
+
+* Add an interactive action panel to the Kanban card details view.
+
+
+* Implement a "Score Lead" button that triggers the scoring endpoint, captures the Celery `job_id` (HTTP 202), and uses the Signal-based RxJS polling engine against `/api/v1/ai/jobs/{job_id}` to render real-time progression.
+
+
+* Update the card's local state dynamically using Angular Signals upon completion.
+
+
+* Implement a "Draft Follow-Up" button that launches a glassmorphic modal preview displaying the customized email text with an instant "Copy to Clipboard" trigger.
+
+
+
+**Definition of Done:**
+
+* [ ] Standalone components compile cleanly with zero errors, remaining strictly under our CSS budget.
+
+
+* [ ] Verified that initiating scoring launches an active progress tracker and dynamically updates lead metrics on completion.
+
+---
+
 ### **Milestone 8 Blueprint: CRM AI Copilot & Lead Scoring (Module 2 100% Completion)**
 
 Our logical next step is to **conclude Module 2 (CRM Engine) by bringing it to 100% completion**. Pausing at 75% was the correct architectural decision, as we now have a fully operational **Centralised AI Platform (Milestone 7)** to handle prompt template orchestrations, pgvector operations, and background task distributions. 
