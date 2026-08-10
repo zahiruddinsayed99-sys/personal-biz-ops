@@ -1,3 +1,34 @@
+## AI prompt
+Here is a prompt you can copy and paste to start your new Jules session and have it execute the tests and generate the final report for Milestone 8:
+
+---
+
+```markdown
+USER_REQUEST:
+Hi Jules, excellent work on implementing the four issues for Milestone 8! 
+
+Before we finalize this milestone, I need you to run a comprehensive test pass across all the implemented branches (`feat/crm-ai-metadata-fields`, `feat/ai-gateway-celery-scoring`, `feat/crm-ai-endpoints`, and `feat/crm-angular-ai-actions`) and generate a final Testing Report.
+
+Please execute the following steps:
+
+1. **Backend Integration & Unit Tests:**
+   - Run the Alembic migrations locally to ensure the database schema is up to date.
+   - Execute the pytest suite across the backend (`pytest tests/test_database_migrations.py`, `pytest tests/test_crm_ai_endpoints.py`, and the general `pytest tests/` for Celery/AI tasks).
+   - Verify that all tests pass, specifically checking that the atomic credit metering and horizontal tenant isolation are functioning correctly.
+
+2. **Frontend Compilation & Tests:**
+   - Run the Angular frontend tests (`npx ng test --watch=false --browsers=ChromeHeadless`).
+   - Verify that the Angular application compiles successfully without errors (`npm run build`).
+
+3. **Generate Testing Report:**
+   - Provide a structured "Testing Report" summarizing the results of the backend tests, frontend tests, and compilation steps. 
+   - If any tests fail, please debug and fix them, then re-run the tests before providing the final report.
+
+Please provide the final Testing Report once everything passes!
+
+```
+---
+## Testing instruction
 1. feat(db): Alembic schema migration for CRM AI metadata fields
 Branch: feat/crm-ai-metadata-fields
 
