@@ -1,3 +1,234 @@
+Here is the updated blueprint adding a **Sandbox Payment Simulation** (Razorpay/UPI mock modal) and an **Admin Order Status Management** dashboard feature.
+
+---
+
+## 🛠️ Additional Functional Features Included
+
+1. **Payment Sandbox Simulation (Razorpay / UPI Modal):**
+* Simulated Razorpay/UPI payment modal with pre-filled test UPI ID (`success@razorpay` or `8888888888@upi`).
+* Handles simulated payment processing (`Processing...` spinner), success, and failure fallback states.
+
+
+2. **Admin Order Management Dashboard:**
+* Accessible via a quick toggle in the header or route (`/admin/orders`).
+* Lists generated orders with real-time status updates: `Order Placed` ➔ `In Transit` ➔ `Delivered` or `Cancelled`.
+* Updating status triggers a instant visual state refresh on both Admin and User views.
+
+
+
+---
+
+## 📋 Complete Task Assignment Prompt for Jules
+
+Copy and paste the entire block below into your **Jules** session:
+
+---
+
+### 🤖 Task Assignment for Jules
+
+**Project Goal:** Build a complete Proof of Concept (POC) E-Commerce Application for the Indian Beauty, Cosmetics & Grooming Market using Angular (v16+) and Python FastAPI. Use INR (`₹`) formatting. No database required; manage state in Angular Signals/RxJS and sync with FastAPI in-memory mock endpoints.
+
+---
+
+### 1. Backend Architecture (`backend/main.py`)
+
+Implement Python FastAPI endpoints with CORS enabled for `http://localhost:4200`:
+
+* **`GET /api/v1/products`**: Return Indian cosmetics/grooming items (Lipsticks, Trimmers, Palettes) in INR with high anchor MRPs and selling prices (`mrp_inr`, `selling_price_inr`).
+* **`GET /api/v1/checkout/defaults`**: Return `preferred_payment: "UPI / GPay"`, `shipping_fee_inr: 0`, and pincode defaults (`400001`).
+* **`GET /api/v1/discounts/welcome`**: Return auto-applied voucher `FIRSTGLOW200` (`discount_amount_inr: 200`).
+* **`POST /api/v1/products/customize`**: Accept custom shade/kit selections and return a customized bundle object.
+* **`POST /api/v1/cart/checkout`**: Accept order payload, create order with status `Placed`, generate a mock Razorpay payment transaction token/order_id.
+* **`POST /api/v1/payment/verify-sandbox`**: Accept mock payment verification (`payment_status: "SUCCESS"` or `"FAILED"`) and update order status.
+* **`GET /api/v1/admin/orders`**: Return all created orders for the Admin Dashboard.
+* **`PATCH /api/v1/admin/orders/{order_id}`**: Update order status (`Delivered` or `Cancelled`).
+
+---
+
+### 2. Frontend Architecture & UX Requirements (`frontend/`)
+
+Build a single-page Angular application styled with Tailwind CSS enforcing **6 Psychological UX Principles**:
+
+1. **Contrast Effect (Catalog & Pricing UI):**
+* Render products with crossed-out MRPs (e.g., ~~₹999~~ **₹549**) and discount percentage badges.
+* Default catalog sorting set to **"Best Value / Bestsellers"**.
+
+
+2. **The IKEA Effect (Interactive Product Customizer PDP):**
+* Build a "Custom Vanity Kit" widget allowing users to select 3 custom shades or grooming attachments before adding to cart.
+
+
+3. **Reciprocity (Upfront & Post-Purchase Value):**
+* Auto-apply the ₹200 voucher (`FIRSTGLOW200`) to the cart drawer on initial load.
+* On order completion, present an instant bonus offer (*"Claim your Free Mini Sample Kit on your next order"*).
+
+
+4. **Goal Gradient Effect (Visual Progress Bar):**
+* Sticky top header with a progress bar seeded at **30%** ("Welcome Kit Unlocked").
+* Dynamic cart indicator: *"Add ₹150 more to reach ₹999 for Free Gift Pouch"*.
+
+
+5. **Loss Aversion (Urgency & Scarcity):**
+* Active 10-minute cart reservation countdown timer (`09:59`) in the cart/checkout headers.
+* Low-stock tags on PDP items (*"⚡ Only 2 left in Peachy Affair"*).
+
+
+6. **Smart Defaults (Frictionless Checkout):**
+* Pre-select **"UPI / GPay"** as primary payment method.
+* Pre-check **"Billing address same as shipping"**.
+* Provide an **"Express Guest Checkout"** primary button.
+
+
+
+---
+
+### 3. Payment Sandbox & Admin Feature Implementation
+
+* **Payment Sandbox Component:**
+* When user clicks "Pay with UPI/Razorpay", launch a stylized Razorpay Sandbox modal.
+* Pre-fill test UPI handle (`success@razorpay`) and provide "Simulate Success" and "Simulate Failure" buttons.
+* Successful payment redirects to the **Order Confirmation Screen**.
+
+
+* **Admin Dashboard View (`/admin` or Header Toggle):**
+* View all placed orders with details: Order ID, Items, Total Amount (INR), Payment Status, and Current Order Status.
+* Action buttons to update status: **Mark as Delivered** or **Cancel Order**.
+* Dynamic status badge color indicators (Green for Delivered, Red for Cancelled, Blue for Placed).
+
+
+
+---
+
+### 4. End-to-End User Journey
+
+Ensure full state synchronization:
+
+1. **Catalog Browsing & Customization** → 2. **Cart Drawer (Voucher + Timer)** → 3. **Checkout (Smart Defaults)** → 4. **Razorpay Sandbox Modal Payment** → 5. **Order Confirmation** → 6. **Admin Dashboard Order Status Management (Delivered / Cancelled)**.
+
+---
+Setting up a project and handing it off to an automated coding agent like Jules is a great workflow for rapid prototyping. To ensure Jules generates clean, functional code with minimal back-and-forth, here is the recommended setup process and task assignment workflow.
+
+---
+
+## 🛠️ Step 1: Initialize the Blank Project Repository
+
+Before assigning the prompt, set up the initial repository structure on your machine or GitHub:
+
+```bash
+# 1. Create directory structure
+mkdir indian-beauty-ux-poc
+cd indian-beauty-ux-poc
+
+# 2. Create frontend (Angular v16+) directory
+ng new frontend --standalone --routing --style=css
+# Optional: Add Tailwind CSS inside the frontend folder
+
+# 3. Create backend directory
+mkdir backend
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install fastapi uvicorn pydantic
+
+```
+
+---
+
+## 📋 Step 2: Assign Task to Jules (The Execution Prompt)
+
+Copy and paste the detailed prompt below directly into **Jules** (or your preferred AI agent environment):
+
+---
+
+### 🤖 Task Assignment for Jules
+
+**Project Goal:** Build a Proof of Concept (POC) E-Commerce Application for the Indian Beauty, Cosmetics & Grooming Market using Angular (v16+) and Python FastAPI. Focus on psychological UX principles and implement a full end-to-end transaction flow without a SQL database.
+
+---
+
+### 1. Backend Architecture (`backend/main.py`)
+
+Implement a Python FastAPI server with CORS enabled for `http://localhost:4200` containing in-memory JSON endpoints:
+
+* **`GET /api/v1/products`**: Return Indian cosmetics/grooming items (Lipsticks, Trimmers, Palettes) formatted in INR (`₹`) with high anchor MRPs and selling prices (`mrp_inr`, `selling_price_inr`).
+* **`GET /api/v1/checkout/defaults`**: Return `preferred_payment: "UPI / GPay"`, `shipping_fee_inr: 0`, and pincode defaults (`400001`).
+* **`GET /api/v1/discounts/welcome`**: Return auto-applied voucher `FIRSTGLOW200` (`discount_amount_inr: 200`).
+* **`POST /api/v1/products/customize`**: Accept custom shade/kit selections and return a customized bundle object.
+* **`POST /api/v1/cart/checkout`**: Process simulated payment, generate an `order_id`, and return order confirmation details with a post-purchase reward voucher.
+
+---
+
+### 2. Frontend Architecture & UX Requirements (`frontend/`)
+
+Build a single-page Angular application styled with Tailwind CSS enforcing **6 Psychological UX Principles**:
+
+1. **Contrast Effect (Catalog & Pricing UI):**
+* Render products with crossed-out MRPs (e.g., ~~₹999~~ **₹549**) and discount percentages.
+* Default catalog sorting set to **"Best Value / Bestsellers"**.
+
+
+2. **The IKEA Effect (Interactive Product Customizer PDP):**
+* Build a "Custom Vanity Kit" widget allowing users to select 3 custom shades or grooming attachments before adding to cart.
+
+
+3. **Reciprocity (Upfront & Post-Purchase Value):**
+* Auto-apply the ₹200 voucher (`FIRSTGLOW200`) to the cart drawer on initial load.
+* On order completion, present an instant bonus offer (*"Claim your Free Mini Sample Kit on your next order"*).
+
+
+4. **Goal Gradient Effect (Visual Progress Bar):**
+* Sticky top header with a progress bar seeded at **30%** ("Welcome Kit Unlocked").
+* Dynamic cart indicator: *"Add ₹150 more to reach ₹999 for Free Gift Pouch"*.
+
+
+5. **Loss Aversion (Urgency & Scarcity):**
+* Active 10-minute cart reservation countdown timer (`09:59`) in the cart/checkout headers.
+* Low-stock tags on PDP items (*"⚡ Only 2 left in Peachy Affair"*).
+
+
+6. **Smart Defaults (Frictionless Checkout):**
+* Pre-select **"UPI / GPay"** as primary payment method.
+* Pre-check **"Billing address same as shipping"**.
+* Provide an **"Express Guest Checkout"** primary button.
+
+
+
+---
+
+### 3. Full Transaction Journey (End-to-End Functional Completion)
+
+Ensure the state correctly updates through all stages using Angular Signals / RxJS:
+
+1. **Catalog Browsing & Customization** → 2. **Cart Drawer (Voucher + Countdown Timer)** → 3. **Checkout Screen (UPI Smart Defaults)** → 4. **Order Confirmation Summary Screen**.
+
+---
+
+---
+
+## 🎯 Step 3: Verification & Next Steps
+
+Once Jules completes the generation, run these two commands to test the POC locally:
+
+1. **Start Python Backend:**
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+
+```
+
+
+2. **Start Angular Frontend:**
+```bash
+cd frontend
+ng serve --open
+
+```
+
+
+
+Is there any specific payment API simulation or extra UI component you want Jules to include before you hand off the task?
+
+---
 Yes, the plan covers **all 6 psychological UX principles** mapped directly to the Indian cosmetics and grooming market:
 
 1. **Smart Defaults:** Pre-selected UPI/GPay payment option, default free shipping above ₹499, auto-filled address/pincode defaults.
