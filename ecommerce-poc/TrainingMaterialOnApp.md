@@ -47,6 +47,6 @@ Psychology: The pain of losing something (a reserved cart item or a low-stock pr
 Smart Defaults (Frictionless Checkout):
 Implementation: Pre-selecting "UPI / GPay" (the dominant payment method in India) and checking the "Billing address same as shipping" box by default.
 Psychology: Users are prone to take the path of least resistance. Good defaults reduce cognitive load and checkout friction.
-4. Testing and Automation Strategy
+## 4. Testing and Automation Strategy
 End-to-End Visual Testing: The project can be validated using Playwright Python scripts. By scripting the browser to click through the Catalog -> Customizer -> Cart -> Checkout -> Razorpay Modal -> Confirmation -> Admin flow, you can programmatically ensure all UX elements render and function as expected.
 This architectural breakdown should provide a strong foundation for your training materials, demonstrating how modern frameworks can be leveraged to build user-centric, psychologically optimized web applications. Let me know if you need any further clarification on these concepts!
