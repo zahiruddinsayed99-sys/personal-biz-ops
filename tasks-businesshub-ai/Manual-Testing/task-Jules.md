@@ -1,3 +1,29 @@
+Addresses implementation gaps identified in the Functional Features Specification audit for Modules 2 and 4.
+
+### 1. CRM Contacts Directory
+Added full backend CRUD support for the `Contact` model.
+* Created `backend/app/schemas/contact.py`.
+* Created `backend/app/repositories/contact_repository.py`.
+* Created and registered `backend/app/api/v1/endpoints/crm_contacts.py`.
+* Endpoints strictly enforce tenant boundaries and check `crm:read`, `crm:write`, and `crm:delete` permissions.
+
+### 2. CRM Kanban Optimistic UI
+Fixed the Angular component (`crm-pipeline.component.ts`) that handles pipeline stages.
+* Drag-and-drop now instantly moves the card via `this.deals.update()`.
+* If the API request (`stageUpdateSubject`) fails, the card automatically rolls back to its `oldStage`.
+* The error toast only fires on actual failures, rather than every time the subject is triggered.
+
+### 3. LMS Markdown Player
+Implemented a secure Angular markdown renderer.
+* Added `marked` and `dompurify` dependencies.
+* Created `MarkdownPipe` which parses markdown and strictly sanitizes it against XSS using DOMPurify before bypassing Angular security.
+* Created `LmsPlayerComponent` with foundational styling for markdown elements (headers, quotes, code blocks).
+
+### Local Verification & Testing Guide
+* **Dependencies:** Run `npm install` in the `frontend` folder to install `marked` and `dompurify`.
+* **Testing Backend:** Verify the new `/api/v1/crm/contacts` endpoints in Swagger or via `pytest` (using the same environment setup).
+* **Testing Frontend:** Run `npm run test` or manually verify the optimistic Kanban rollback by disabling your network connection locally and dropping a card.
+##
 Role: Full-Stack Senior Engineer
 Task: Implement missing features and complete partial implementations for the BusinessHub AI platform (Angular Frontend + FastAPI Backend).
 Context: We recently audited the `develop` branch against our Functional Features Specification. I need you to generate the exact code changes required to resolve the following gaps in Module 2 (CRM) and Module 4 (LMS).
