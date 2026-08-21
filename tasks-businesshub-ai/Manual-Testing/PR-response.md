@@ -1,5 +1,42 @@
-Yahan in dono PR (Pull Request) descriptions ka beginner-friendly Hinglish translation hai. Technical terms (jaise backend, frontend, unit tests) ko waise hi rakha gaya hai taaki samajhne mein aasaani ho.
+# PR 2
+Here is neat Markdown format for you. I make it easy to read.
 
+### Features Added
+
+* **Workspace Settings Page (`/settings`):** Have Company Profile. Check GSTIN is exactly 15 chars.
+* **Team Invite Panel:** Inside Workspace Settings. Make invite URL with token. Use app origin dynamically.
+* **Global `billingInterceptor`:** Catch `402 ERR_BILLING_001` error from backend. Route user to `/billing` page. Show soft-lock warning.
+* **Manage Billing Button:** Wire "Manage Billing (Portal)" button in Billing Dashboard. Hit `POST /api/v1/billing/portal`.
+
+---
+
+### Local Verification & Testing Guide
+
+#### 1. Install and Build
+
+```bash
+cd frontend
+npm install
+npx @angular/cli build
+
+```
+
+#### 2. Run Unit Tests
+
+```bash
+cd frontend
+npx ng test --watch=false --browsers=ChromeHeadless
+
+```
+
+#### 3. Manual UI Verification
+
+1. Start frontend server (`npm start`).
+2. Go to `http://localhost:4200/settings`.
+3. Fill Company Profile with good GSTIN (e.g., `12ABCDE3456F7Z8`) and State. Click Save. Check success toast.
+4. Scroll to Team Invite section. Enter email, click "Create Invite". Ensure correct link show up and copy button work.
+5. Try go to AI platforms or trigger overage to simulate `402 ERR_BILLING_001`. Check it redirect to `/billing` with locked alert message.
+6. In `/billing`, click "Manage Billing (Portal)". Verify it hit Stripe API and redirect.
 ---
 
 # 1
