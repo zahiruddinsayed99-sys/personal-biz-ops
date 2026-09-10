@@ -1,3 +1,676 @@
+Yes — **important correction accepted**: there have been **zero claims under the existing Niva Bupa policy**. That actually makes the portability discussion more favorable because Care will not be evaluating the family as having a two-claim history.
+
+I would now send Care **one comprehensive email** rather than asking questions over WhatsApp/phone. The goal is to force Care to give you a **written, policy-specific answer**, particularly on portability, diabetes, ₹10L + ₹10L, and **1-year vs 2-year tenure**.
+
+I also want to correct/clarify my earlier point about the 2-year policy: the brochure specifically says the **Tenure Multiplier** combines the annual SI of a multi-year policy for a single claim during the policy tenure.  It also says that some optional benefits are available specifically with multi-tenure policies.  So **1-year vs 2-year is absolutely something we should get clarified before choosing the tenure.**
+
+---
+
+# Email to Care Health Insurance
+
+### Subject:
+
+**Request for Written Confirmation – Portability, Diabetes Coverage, Sum Insured, Benefits & 1-Year vs 2-Year Ultimate Care**
+
+Dear Care Health Insurance Team,
+
+I am considering **porting my existing Niva Bupa ReAssure 2.0 Titanium+ family floater policy** to Care Health Insurance – Ultimate Care.
+
+Before proceeding with portability, I would like written clarification on the following points based on **my specific portability proposal/quotation**, rather than only general product information.
+
+### Existing policy details
+
+* Existing insurer: Niva Bupa
+* Plan: ReAssure 2.0 – Titanium+
+* Family Floater: 2 Adults + 2 Children
+* Adult 1: Age 51
+* Adult 2: Age 43 – Diabetes Mellitus
+* Child 1: Age 19
+* Child 2: Age 15
+* Existing policy continuity/inception date: **17-Oct-2022**
+* Current policy period: 17-Oct-2024 to 16-Oct-2026
+* Current Base Sum Insured: **₹7.5 lakh**
+* Existing Booster+: **₹7.5 lakh**
+* Current Base + Booster shown: **₹15 lakh**
+* Existing policy has **NO CLAIMS since inception**
+* Smart Health+ Disease Management: **Gold**
+
+I have received an Ultimate Care quotation for:
+
+* ₹10 lakh Sum Insured
+* Quotation wording: **"₹10 Lacs + ₹10 Lacs + UNLIMITED RECHARGE"**
+* 1 year premium: ₹31,606
+* 2 year premium: ₹61,962
+* 3 year premium: ₹92,537
+
+Please clarify the following.
+
+---
+
+## A. PORTABILITY & CONTINUITY
+
+### 1. Continuity date
+
+Please confirm in writing that, if the portability is accepted, my continuity date of:
+
+**17-Oct-2022**
+
+will be recognised by Care.
+
+Please confirm how this will be recorded in the final Care policy schedule/certificate.
+
+---
+
+### 2. Waiting-period credit
+
+Please provide a written calculation showing exactly which waiting periods will be considered already served because of my Niva continuity from **17-Oct-2022**.
+
+Please specifically confirm the treatment of:
+
+* Initial 30-day waiting period
+* Named ailment waiting period
+* Pre-existing disease (PED) waiting period
+* Any disease-specific waiting period.
+
+---
+
+### 3. No-claim status
+
+Please note that **there have been ZERO claims under my existing Niva policy since inception**.
+
+Please confirm that this will be recorded correctly in the portability/underwriting process.
+
+---
+
+# B. EXISTING NIVA ₹7.5L BASE + ₹7.5L BOOSTER+
+
+My existing policy currently shows:
+
+**Base SI: ₹7.5 lakh**
+
+**Booster+: ₹7.5 lakh**
+
+**Total Base + Booster: ₹15 lakh**
+
+### 4. Booster+ portability
+
+Please confirm exactly how the existing **₹7.5 lakh Niva Booster+** will be treated on portability.
+
+Will the entire ₹7.5 lakh Booster+/eligible accumulated benefit receive portability credit?
+
+If not, please specify:
+
+* amount transferred
+* amount not transferred
+* reason for non-transfer.
+
+Please provide the calculation in rupees.
+
+---
+
+### 5. No Claim Bonus / accumulated benefits
+
+Please confirm exactly what portability credit Care will recognise from my existing Niva policy's accumulated Booster+/No Claim Bonus.
+
+I do not want a general statement such as "NCB will be carried forward."
+
+Please provide the **actual amount applicable to my proposal**.
+
+---
+
+# C. ₹10 LAKH + ₹10 LAKH + UNLIMITED RECHARGE
+
+### 6. Please explain the quotation wording
+
+My quotation says:
+
+> **₹10 Lacs + ₹10 Lacs + UNLIMITED RECHARGE**
+
+Please explain exactly what each ₹10 lakh represents.
+
+Specifically, please confirm whether it means:
+
+* ₹10 lakh Base SI + ₹10 lakh Cumulative Bonus, OR
+* ₹10 lakh Base SI + ₹10 lakh Tenure Multiplier for a 2-year policy, OR
+* something else.
+
+Please provide a simple numerical example.
+
+---
+
+### 7. Amount available for a single large claim
+
+For a **2-year policy with ₹10 lakh Base SI**, please tell me the maximum amount that can be utilised for **one single hospitalisation claim**, assuming no previous claim has been made.
+
+Please separately show:
+
+**Base SI + applicable Bonus + Tenure Multiplier + other applicable benefits**
+
+and explain which components can actually be combined for that claim.
+
+---
+
+### 8. Multiple claims in the same policy year
+
+Please provide examples for a ₹10 lakh Base SI policy:
+
+**Example 1:** Member A claims ₹8 lakh.
+
+**Example 2:** Member A subsequently claims another ₹8 lakh.
+
+**Example 3:** Member A claims ₹8 lakh and Member B subsequently claims ₹8 lakh.
+
+**Example 4:** Member A has two hospitalisations for the **same illness**.
+
+Please explain exactly how Unlimited Automatic Recharge operates in each situation.
+
+---
+
+### 9. Same illness / same insured person
+
+The brochure says Unlimited Automatic Recharge is available for unlimited times for **unrelated or same illness from subsequent claims**. 
+
+Please confirm that this applies to:
+
+* the same insured person
+* the same illness
+* multiple subsequent claims
+* multiple claims in the same policy year.
+
+Please identify any conditions or exclusions.
+
+---
+
+# D. 1-YEAR vs 2-YEAR POLICY — VERY IMPORTANT
+
+I am considering both the **1-year and 2-year options**, so please provide a direct comparison.
+
+### 10. Tenure Multiplier
+
+Your brochure states that the Tenure Multiplier can:
+
+> combine annual Sum Insured of a multi-year policy for a single claim during the policy tenure. 
+
+Please confirm whether **Tenure Multiplier is included in my quoted 2-year premium of ₹61,962**.
+
+If yes, please show exactly how it works.
+
+For example:
+
+### 1-year ₹10L policy
+
+What is the maximum SI available for one major claim?
+
+### 2-year ₹10L policy
+
+What is the maximum SI available for one major claim because of Tenure Multiplier?
+
+Please provide actual numbers.
+
+---
+
+### 11. Is Tenure Multiplier available in the 1-year policy?
+
+Please confirm whether Tenure Multiplier is:
+
+* unavailable for 1-year policy, or
+* available under some other condition.
+
+---
+
+### 12. What benefits change between 1-year and 2-year?
+
+Please provide a table comparing my quoted:
+
+**1-year ₹31,606**
+
+versus
+
+**2-year ₹61,962**
+
+for:
+
+* Base SI
+* Cumulative Bonus
+* Infinity Bonus
+* Unlimited Automatic Recharge
+* Tenure Multiplier
+* Unlimited Care
+* Premium Payback
+* Wellness Discount
+* Loyalty Boost
+* any other optional benefits.
+
+Please specifically identify **which benefits are different because I select a 2-year tenure**.
+
+---
+
+### 13. Does the 2-year policy lock the premium?
+
+If I pay ₹61,962 for 2 years, please confirm:
+
+* Is the premium fixed for the entire 2-year policy?
+* Can Care revise the premium during the 2-year policy period?
+* If the premium is revised by the insurer, does the revision apply immediately or only at renewal?
+* Does Premium Freeze provide any additional protection against age-related premium increases?
+
+Please explain with an example.
+
+---
+
+### 14. Wellness discount on 2-year policy
+
+Please confirm how the Wellness Discount is calculated for the 2-year policy.
+
+The brochure states that for multi-tenure policies the average number of healthy days over the policy tenure is considered. 
+
+Please confirm:
+
+* whether the discount is applied at renewal after the 2-year period,
+* how the discount is calculated,
+* whether it applies to the entire premium,
+* and whether all four family members are considered.
+
+---
+
+### 15. Premium Payback with 2-year policy
+
+The brochure says the first policy-year **base premium** is refunded after every 5 consecutive claim-free policy years, subject to subsequent renewal. 
+
+Please explain how this works if I choose:
+
+* 1-year policy
+* 2-year policy
+* 3-year policy.
+
+Please clarify whether a 2-year policy counts as **two consecutive policy years** for this purpose.
+
+---
+
+# E. DIABETES — MOST IMPORTANT
+
+One insured member, age 43, has **Diabetes Mellitus**.
+
+My current Niva policy has:
+
+**Smart Health+ – Disease Management – GOLD**
+
+### 16. Diabetes coverage after portability
+
+Please confirm in writing:
+
+> Will Diabetes Mellitus and diabetes-related complications be covered from the effective date of the ported Care policy?
+
+Please specify the exact effective date.
+
+---
+
+### 17. Does the 30-day waiting period apply?
+
+Your Ultimate Care brochure states:
+
+* Initial waiting period: 30 days
+* PED waiting period: 36 months. 
+
+It also describes Instant Cover for Diabetes and other specified conditions, with coverage beginning from the **31st day** after the policy start date after serving the initial waiting period. 
+
+Therefore please clarify:
+
+**Because this is a PORTABILITY case with continuity from 17-Oct-2022, will the 30-day initial waiting period still apply to the diabetic member?**
+
+Please provide a written answer specific to my proposal.
+
+---
+
+### 18. Smart Health+ Gold
+
+Please confirm whether Care will recognise the existing Niva **Smart Health+ Disease Management Gold** benefit in any manner during portability.
+
+If not, please confirm what exact Care benefit provides equivalent/greater protection for the diabetic member.
+
+---
+
+### 19. Diabetes-related complications
+
+Please confirm whether the following are covered after portability without a fresh PED waiting period:
+
+* Diabetes Mellitus
+* diabetes-related complications
+* hospitalisation arising from diabetes
+* day-care treatment arising from diabetes
+* complications affecting other organs due to diabetes.
+
+Please identify any exclusions.
+
+---
+
+# F. UNDERWRITING / EXCLUSIONS
+
+### 20. Medical underwriting
+
+Please confirm whether this portability proposal will be medically underwritten.
+
+If yes, please confirm whether the final approval can contain:
+
+* additional loading
+* permanent exclusion
+* disease-specific exclusion
+* additional waiting period
+* co-payment
+* deductible
+* any other special condition.
+
+---
+
+### 21. Written final underwriting decision
+
+Before I discontinue/renew my existing Niva policy, I require the final Care portability approval showing all:
+
+* accepted Sum Insured
+* portability credits
+* waiting-period credits
+* exclusions
+* loadings
+* co-payment
+* deductible
+* room restrictions
+* special conditions.
+
+Please confirm that these will be provided before the portability becomes effective.
+
+---
+
+# G. ROOM / HOSPITALISATION
+
+### 22. Room eligibility
+
+My quotation mentions:
+
+> **Single Private AC Room**
+
+Please confirm whether this is a room-category restriction.
+
+If I select a room above the eligible category, will proportionate deductions apply to:
+
+* room rent
+* doctor fees
+* surgeon fees
+* nursing
+* investigations
+* medicines
+* entire hospitalisation claim?
+
+Please provide an example.
+
+---
+
+### 23. ICU
+
+Please confirm that ICU expenses are covered up to the applicable Sum Insured without a separate ICU sub-limit.
+
+---
+
+### 24. Modern / advanced technology treatment
+
+Please confirm whether advanced/modern treatments are covered up to the applicable SI without a separate procedure-specific sub-limit.
+
+Please specifically provide the limit/condition for:
+
+* robotic surgery
+* robotic-assisted procedures
+* other advanced technology procedures.
+
+---
+
+### 25. Pre/post hospitalisation
+
+Please confirm that my policy provides:
+
+* Pre-hospitalisation: **60 days**
+* Post-hospitalisation: **90 days**
+
+and confirm whether these limits can change because of portability or selected add-ons.
+
+The brochure specifically states 60 days pre and 90 days post. 
+
+---
+
+# H. OTHER IMPORTANT CONDITIONS
+
+### 26. Co-payment
+
+Please confirm:
+
+> **0% co-payment**
+
+for all four insured members.
+
+---
+
+### 27. Deductible
+
+Please confirm:
+
+> **₹0 deductible**
+
+for all four insured members.
+
+---
+
+### 28. Disease-specific sub-limits
+
+Please confirm whether there are any disease-specific or treatment-specific sub-limits applicable to my quoted policy.
+
+If yes, please provide the complete list.
+
+---
+
+### 29. Organ donor / domiciliary / ambulance
+
+Please confirm the exact limits for:
+
+* Domiciliary Hospitalisation
+* Home Care
+* Organ Donor
+* Road Ambulance
+* Air Ambulance.
+
+---
+
+# I. INFINITY BONUS / UNLIMITED CARE
+
+### 30. Infinity Bonus
+
+Please confirm that **Infinity Bonus is included in my quoted premium**.
+
+If yes, please provide a year-wise example for a ₹10 lakh Base SI:
+
+Year 1 → ?
+
+Year 2 → ?
+
+Year 3 → ?
+
+Year 4 → ?
+
+Year 5 → ?
+
+Please confirm that the bonus does not reduce because of claims, as stated in the brochure. 
+
+---
+
+### 31. Unlimited Care
+
+Please explain exactly how Unlimited Care works.
+
+The brochure states:
+
+> One claim during the lifetime of the policy payable without any Sum Insured limit. 
+
+Please clarify:
+
+* Is this once per policy or once per insured member?
+* Does it apply to a family floater?
+* When does it become available?
+* Does Base SI/Bonus/Recharge have to be exhausted first?
+* Can it be used by the diabetic member?
+* Does portability affect eligibility?
+
+---
+
+# J. FINAL REQUEST
+
+Finally, please provide me with a **one-page written benefit calculation for my specific family**, showing:
+
+### Existing Niva
+
+**₹7.5L Base + ₹7.5L Booster+**
+
+↓
+
+### Portability credit recognised by Care
+
+**₹________**
+
+↓
+
+### Care
+
+**₹10L Base + ₹________ Bonus + ₹________ Recharge + ₹________ other benefits**
+
+Please show separately for:
+
+**1-year policy**
+
+and
+
+**2-year policy**
+
+including the maximum amount available for:
+
+* first claim
+* subsequent claim
+* same illness
+* same insured person
+* different family member
+* one large claim under Tenure Multiplier.
+
+I would also like confirmation that there will be **no new exclusion, loading, co-payment, deductible or residual PED waiting period** unless specifically mentioned in the final underwriting approval.
+
+I will make my final portability decision only after receiving these written confirmations.
+
+Thank you.
+
+Regards,
+[Your Name]
+-----------
+
+# 🔥 Why I want these questions answered
+
+There are **4 questions I would consider deal-breakers**.
+
+### 1. Diabetes
+
+> **Is the 43-year-old's diabetes and diabetes-related complications covered immediately after portability, and from exactly what date?**
+
+This is #1.
+
+---
+
+### 2. Niva Booster transfer
+
+> **What exactly happens to my existing ₹7.5L Booster+?**
+
+Don't accept:
+
+> "NCB will be carried forward."
+
+Demand the **₹ amount**.
+
+---
+
+### 3. ₹10L + ₹10L
+
+Ask them to show you a **claim calculation**.
+
+This is much better than asking:
+
+> "What does ₹10L + ₹10L mean?"
+
+Ask:
+
+> **"If I have a ₹20 lakh hospital bill in the first year and have not made any previous claim, exactly how much will Care pay and under which benefit?"**
+
+That forces them to explain the real mechanics.
+
+---
+
+### 4. 1-year vs 2-year
+
+This is now particularly important.
+
+Your prices are:
+
+|                   |  1 Year |                    2 Years |
+| ----------------- | ------: | -------------------------: |
+| Premium           | ₹31,606 |                    ₹61,962 |
+| Annualised        | ₹31,606 |                **₹30,981** |
+| Saving/year       |       — |                      ~₹625 |
+| Tenure Multiplier |       ? | **Potentially applicable** |
+| Infinity Bonus    |       ? |                          ? |
+| Recharge          |       ? |                          ? |
+| Premium Payback   |       ? |                          ? |
+
+The **2-year policy is only ₹2,750 more than exactly two × the 1-year premium**:
+
+₹31,606 × 2 = **₹63,212**
+
+2-year quote = **₹61,962**
+
+Difference = **₹1,250 total**, or ₹625/year.
+
+So **the premium saving alone is not a compelling reason to lock into two years**.
+
+The real question is whether the 2-year policy gives you a meaningful **Tenure Multiplier/coverage advantage**.
+
+The brochure explicitly says Tenure Multiplier can combine annual SI of a multi-year policy for a single claim during the policy tenure. 
+
+### My preliminary view:
+
+**If the 2-year plan gives a genuine ₹20L single-claim Tenure Multiplier on your ₹10L SI, with the other benefits intact, then 2-year becomes very interesting.**
+
+If there is **no meaningful coverage advantage**, I'd lean toward **1 year initially**, because you're porting a valuable existing policy and the first year is essentially a **real-world test of Care's service/claims experience** before committing to a longer tenure.
+
+---
+
+## One correction to our overall analysis
+
+Because you've confirmed **zero claims**, I would now remove the previous concern:
+
+> "Care underwriting will review your two existing claims."
+
+That was based on the earlier hand-off and is no longer applicable.
+
+Your actual profile is:
+
+**4 members + Diabetes + 17-Oct-2022 continuity + ₹7.5L Booster + ZERO claims + Smart Health+ Gold.**
+
+That is the profile we should use from here onward.
+
+### Next step
+
+**Send this email to Care and get their response in writing.** Don't rely on a WhatsApp "yes" or salesperson's verbal confirmation.
+
+When you receive Care's reply, **paste/upload it here exactly as they send it**. I'll go through their answers one by one and mark each:
+
+🟢 **Confirmed / safe**
+🟡 **Needs clarification**
+🔴 **Potential deal-breaker**
+
+Then we'll do the final **Niva 2-year renewal vs Care 1-year vs Care 2-year** decision based on the actual answers, rather than sales claims.
+
+---
+# review
 Yes — this attachment is **very important**. I reviewed all 6 pages of the Care Ultimate Care brochure you uploaded, including the detailed benefit tables and footnotes.
 
 And I found one **major clarification** that changes how we should interpret the Care quotation.
