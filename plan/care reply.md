@@ -1,319 +1,549 @@
-Thanks. This reply is **very useful**, but I would **not treat it as final approval yet**. It answers several of our biggest questions, and some answers are quite favorable, but there are still a few important ambiguities.
+This reply is **very useful**. We now have answers to almost all of the important questions, and there is one **major discovery**:
 
-## My reading of Care's reply
+> **The Care ₹10L + ₹10L + Unlimited Recharge quotation is NOT giving you Tenure Multiplier.**
 
-### 🟢 Very positive answers
+Care has explicitly clarified that **Tenure Multiplier is an optional rider**, and it is **not included in your current quotation**.
 
-| Issue              | Care's written reply                                  | My assessment     |
-| ------------------ | ----------------------------------------------------- | ----------------- |
-| Continuity         | **17-Oct-2022** will be carried forward               | 🟢 Good           |
-| Waiting periods    | Says all 3 completed with Niva, no additional waiting | 🟢 Very good      |
-| Niva Base SI       | ₹7.5L considered                                      | 🟢 Good           |
-| Niva Booster       | ₹7.5L Booster will be considered                      | 🟢 Very important |
-| Diabetes           | Covered **Day 1 under portability**                   | 🟢 Excellent      |
-| Unlimited Recharge | Multiple times/year                                   | 🟢 Excellent      |
-| Same illness       | Same person + same illness allowed                    | 🟢 Excellent      |
-| Other member       | Recharge can be used by another insured               | 🟢 Excellent      |
-| Infinity Bonus     | Included in 1-year & 2-year                           | 🟢 Good           |
-| ICU                | No limit                                              | 🟢 Good           |
-| Modern treatment   | No sub-limit                                          | 🟢 Good           |
-| Robotic surgery    | No sub-limit                                          | 🟢 Good           |
-
-So, compared with where we started, **Care has now removed several of the biggest concerns**.
+That changes our 1-year vs 2-year analysis significantly.
 
 ---
 
-# 🚨 But there are 5 things I would NOT leave unresolved
+# 1. The most important answers from Care
 
-## 1. The biggest one: What does "we will consider both" actually mean?
+Let's consolidate everything Care has now confirmed in writing.
 
-Care says:
+| Item                         | Care's confirmation         | Status         |
+| ---------------------------- | --------------------------- | -------------- |
+| Continuity                   | **17-Oct-2022**             | 🟢             |
+| Niva Base portability        | ₹7.5L                       | 🟢             |
+| Niva Booster portability     | ₹7.5L                       | 🟢             |
+| **Total portability credit** | **₹15L**                    | 🟢 Excellent   |
+| Additional waiting period    | None                        | 🟢             |
+| Diabetes                     | **Day 1 under portability** | 🟢 Excellent   |
+| Unlimited Recharge           | Multiple times/year         | 🟢             |
+| Same person                  | Yes                         | 🟢             |
+| Same illness                 | Yes                         | 🟢             |
+| Other insured member         | Yes                         | 🟢             |
+| Infinity Bonus               | Included                    | 🟢             |
+| ICU limit                    | None                        | 🟢             |
+| Modern treatment limit       | None                        | 🟢             |
+| Robotic surgery sub-limit    | None                        | 🟢             |
+| Room                         | Single Private AC or below  | 🟡 Restriction |
+| Tenure Multiplier            | **NOT included**            | 🟡 Important   |
+| 1-year vs 2-year benefits    | **No difference**           | 🟢/🟡          |
+| 2-year premium saving        | Yes                         | 🟢             |
 
-> "Your base sum insured is ₹7.5 lakh, and you also have a ₹7.5 lakh Booster Benefit. We will consider both."
-
-This is **not yet precise enough**.
-
-Your current Niva is:
-
-**₹7.5L Base + ₹7.5L Booster = ₹15L**
-
-But your Care quotation is:
-
-**₹10L + ₹10L Recharge**
-
-So we need to know exactly how your existing ₹7.5L + ₹7.5L gets translated into the new Care policy.
-
-### We need this answer:
-
-> **"Please confirm the exact portability credit amount in ₹ that will be added/recognised in my Care policy from the existing ₹7.5 lakh Base SI + ₹7.5 lakh Booster Benefit."**
-
-Because "consider both" could mean different things.
+The Care brochure itself confirms the distinction between the standard plan benefits and optional benefits/riders. 
 
 ---
 
-# 2. 🔥 The ₹10L + ₹10L question is now answered
+# 2. The ₹15 lakh portability credit is excellent news
 
-This is a major clarification.
+This is probably the **most important answer we received**.
 
-Care has explicitly said:
+Care has now explicitly stated:
 
-> **Second ₹10 lakh = Recharge Benefit.**
+> **Exact portability credit = ₹15 lakh**
 
-So:
+and:
 
-### It is NOT:
+> ₹7.5L Base + ₹7.5L Booster = ₹15L considered.
 
-₹10L Base + ₹10L Cumulative Bonus
+So your accumulated Niva benefit is **not being ignored**.
 
-### It IS:
+That's a major positive.
 
-**₹10L Base + ₹10L Recharge**
+However, one subtle point remains:
 
-with **Unlimited Recharge**.
+### ₹15L portability credit ≠ ₹15L Care Base SI.
 
-This is much clearer now.
+Your new Care quote is still apparently:
 
-And the Care brochure supports the important part: Unlimited Automatic Recharge can be used multiple times for **same or unrelated illness**, including subsequent claims. 
+> **₹10L Base SI**
 
-So the structure appears to be:
+The ₹15L is the **portability credit/continuity amount being recognised**.
 
-### Initial cover
+We need to understand exactly how that credit interacts with Care's ₹10L Base SI and benefits at claim time.
+
+I would **save Care's written confirmation** because this is valuable evidence.
+
+---
+
+# 3. Now we know what "₹10L + ₹10L + Unlimited Recharge" means
+
+Care has clarified:
+
+> **Second ₹10L = Recharge benefit.**
+
+So your quoted structure is basically:
+
+### Base
 
 **₹10L**
-
-Then when the applicable SI is exhausted:
 
 ### Recharge
 
+**₹10L per recharge**
+
+### Unlimited Recharge
+
+Recharge can be used repeatedly, including:
+
+* same person
+* same illness
+* different illness
+* another family member.
+
+That's actually a **very strong family-floater feature**.
+
+The brochure independently confirms that Unlimited Automatic Recharge can be used unlimited times for same or unrelated illness from subsequent claims. 
+
+---
+
+# 4. 🚨 The 2-year policy question is now much clearer
+
+This is the most important new information.
+
+Care says:
+
+> **"There is no difference between the 1-year and 2-year plans apart from the premium savings available with the 2-year plan."**
+
+So:
+
+### 1-year
+
+₹31,606
+
+### 2-year
+
+₹61,962
+
+And if renewed after one year:
+
+₹31,606 + ₹33,768 = **₹65,374**
+
+Therefore:
+
+| Option                  | 2-year cost |
+| ----------------------- | ----------: |
+| 1-year + 1-year renewal |     ₹65,374 |
+| 2-year policy           | **₹61,962** |
+| Saving                  |  **₹3,412** |
+
+### That's approximately 5.2% saving.
+
+And Care has explicitly told you there is **no coverage advantage** in taking 2 years.
+
+---
+
+# 5. So I would now choose 2 years — IF we choose Care
+
+This is a fairly straightforward conclusion.
+
+Because:
+
+### 2-year does NOT sacrifice any listed benefits
+
+AND
+
+### 2-year costs ₹3,412 less than buying two consecutive 1-year policies at the quoted premiums.
+
+So if the decision eventually becomes:
+
+> **Care 1-year vs Care 2-year**
+
+I'd choose:
+
+# 🟢 Care 2-year
+
+assuming the quotation/underwriting terms remain the same.
+
+The only reason I'd prefer 1-year would be if we discovered some contractual disadvantage in the final policy wording or if Care's underwriting approval differs between the two options.
+
+---
+
+# 6. Tenure Multiplier is NOT worth adding automatically
+
+Care says Tenure Multiplier is a rider.
+
+The brochure confirms:
+
+> Combine annual SI of a multi-year policy for a single claim in a policy tenure. 
+
+But Care has now confirmed that it is **not included** in your quotation.
+
+So we need to decide whether paying extra for it is worthwhile.
+
+### My initial view:
+
+**Don't add it yet.**
+
+Why?
+
+Because you already have:
+
+### ₹10L Base
+
+*
+
+### Unlimited ₹10L Recharge
+
+*
+
+### Infinity Bonus
+
+*
+
+### ₹15L portability credit
+
+*
+
+### Unlimited Care
+
+potentially.
+
+The additional value of Tenure Multiplier may be much less than it initially appeared.
+
+We need its **rider premium and exact interaction** before considering it.
+
+---
+
+# 7. Your four included riders
+
+Care has explicitly said your quotation contains:
+
+1. **Wellness Benefit**
+2. **Infinity Bonus**
+3. **Annual Health Check-up**
+4. **Room Rent Modification**
+
+This is important.
+
+### Infinity Bonus
+
+The brochure says:
+
+> 100% of Base SI every year irrespective of claims, unlimited times on continuous renewal. 
+
+So this is a meaningful benefit.
+
+### Wellness
+
+Potentially useful.
+
+### Annual Health Check-up
+
+Useful but not decision-changing.
+
+### Room Rent Modification
+
+This one deserves attention.
+
+---
+
+# 8. 🚨 Room Rent Modification is the biggest Care weakness so far
+
+Care has now clearly explained it:
+
+> Maximum eligible room = **Single Private Room**
+
+If:
+
+Single Private Room = ₹10,000
+
+Higher room = ₹14,000
+
+Care pays = ₹10,000
+
+You pay = ₹4,000.
+
+That's straightforward.
+
+But there's a **second question** we should eventually verify:
+
+### Does this limitation affect only the room difference?
+
+Or could proportionate deductions apply to other associated hospital expenses?
+
+Care's example only explains the room difference.
+
+I would therefore **not assume** that the example proves the complete claim treatment.
+
+---
+
+# 9. Why this matters
+
+Suppose:
+
+Hospital bill:
+
+₹10 lakh
+
+Eligible single private room:
+
+₹10,000/day
+
+You choose:
+
+₹14,000/day room.
+
+If Care genuinely only excludes the ₹4,000/day room difference, that's relatively manageable.
+
+But if the policy applies **proportionate deductions** to associated hospital expenses, the financial impact could be much larger.
+
+Therefore this remains something I'd verify from the final policy wording.
+
+---
+
+# 10. Care is now looking much stronger
+
+Let's revisit our original concern.
+
+We were worried about:
+
+### ❌ Losing Niva continuity
+
+Care says:
+
+**No — 17-Oct-2022 carried forward.**
+
+### ❌ Losing Niva Booster
+
+Care says:
+
+**No — ₹15L total portability credit.**
+
+### ❌ Fresh diabetes waiting period
+
+Care says:
+
+**No — Day 1 under portability.**
+
+### ❌ Recharge limited to different illness
+
+Care says:
+
+**No — same illness also allowed.**
+
+### ❌ Recharge only for same person
+
+Care says:
+
+**No — another insured member also allowed.**
+
+### ❌ Modern treatment limits
+
+Care says:
+
+**No limit.**
+
+### ❌ Robotic surgery sub-limit
+
+Care says:
+
+**No sub-limit.**
+
+That's a **very substantial improvement** in the Care case.
+
+---
+
+# 11. But there is one thing I want to be careful about
+
+Care's sentence:
+
+> **"Your base sum insured is ₹7.5 lakh, and you also have a ₹7.5 lakh Booster Benefit. We will consider both."**
+
+followed by:
+
+> **"The exact portability credit amount is ₹15 lakhs."**
+
+is excellent.
+
+But we should distinguish between:
+
+### Portability credit
+
+and
+
+### New policy Base SI.
+
+Your quotation says:
+
+**₹10L Base.**
+
+So before we finally approve the switch, I want to see the actual **policy schedule/portability approval** showing how the ₹15L credit is represented.
+
+For example, we need to know whether the policy will effectively show something like:
+
+> Base SI ₹10L
+> Portability credit ₹15L
+> Bonus/recharge separately
+
+or some other formulation.
+
+The final document is what matters at claim time.
+
+---
+
+# 12. Another important discovery: Infinity Bonus is an optional rider
+
+Care says all page-5 benefits are riders, and your quote includes Infinity Bonus.
+
+The brochure says Infinity Bonus gives:
+
+> 100% of Base SI every year irrespective of claim, unlimited times. 
+
+That's excellent.
+
+But let's remember:
+
+### ₹10L Base
+
+means Infinity Bonus is based on:
+
 **₹10L**
 
-And it can be recharged again, potentially multiple times in the year.
+not ₹15L portability credit.
 
-That's a strong feature for a family floater.
-
----
-
-# 3. But what happened to Tenure Multiplier?
-
-This is now the **biggest unresolved 1-year vs 2-year question**.
-
-Care did **not answer our Tenure Multiplier question**.
-
-They only said:
-
-> "If you choose a 2-year tenure, you will receive a tenure discount on the premium."
-
-That's not enough.
-
-Their own brochure says:
-
-> **Tenure Multiplier — Combine annual Sum Insured of multi-year policy for a single claim in a policy tenure.** 
-
-So I specifically want to know:
-
-### Does your 2-year ₹10L policy provide ₹20L for one claim through Tenure Multiplier?
-
-Or is the quoted:
-
-> ₹10L + ₹10L
-
-**only the recharge?**
-
-Those are completely different.
+So we shouldn't calculate Infinity Bonus as 100% of ₹15L unless the policy wording specifically says so.
 
 ---
 
-# 4. Their 1-year vs 2-year answer is incomplete
+# 13. A very interesting long-term picture
 
-They said:
-
-> 1-year renewal second year premium = ₹33,768.
-
-Let's calculate this.
-
-### 1-year route
-
-Year 1:
-
-**₹31,606**
-
-Year 2:
-
-**₹33,768**
-
-Total:
-
-**₹65,374**
-
-### 2-year route
-
-**₹61,962**
-
-Therefore:
-
-### 2-year saves:
-
-**₹3,412 over two years**
-
-That's actually a meaningful saving.
-
-So financially:
-
-| Option                  | Cost for 2 years |
-| ----------------------- | ---------------: |
-| 1-year + Year-2 renewal |      **₹65,374** |
-| 2-year policy           |      **₹61,962** |
-| Saving with 2-year      |       **₹3,412** |
-
-But that's only the premium difference.
-
-We still need to know whether the **2-year policy gives additional coverage through Tenure Multiplier**.
-
----
-
-# 5. There is a potentially important room restriction
-
-Care has now confirmed:
-
-> Single Private AC Room or lower.
-
-> Cannot choose a higher room category.
-
-This is definitely a restriction.
-
-Compare that with your Niva policy, where you did **not opt for Room Type Modification**.
-
-Therefore:
-
-### Niva
-
-No room-category modification currently opted.
+Assuming the quotation remains as described:
 
 ### Care
 
-**Maximum = Single Private AC Room**
+**₹10L Base**
 
-This isn't necessarily a deal-breaker, but I would want to know exactly how proportionate deductions work if a hospital admission requires a higher category or if the hospital only offers a higher category.
+*
 
-Care's answer didn't address that.
+**Unlimited ₹10L Recharge**
 
----
+*
 
-# 6. Diabetes answer is excellent — but keep the email
+**Infinity Bonus**
 
-This is probably the strongest part of Care's reply.
+*
 
-They explicitly wrote:
+**₹15L portability credit**
 
-> "diabetes will also be covered from Day 1 under portability."
+*
 
-That's **exactly the written confirmation we wanted**.
+**Unlimited Care**
 
-The brochure by itself described Instant Cover as starting from Day 31 after the initial 30-day waiting period. 
+This is potentially a very powerful structure.
 
-But your case is different because Care is now saying:
-
-### **Day 1 because of portability.**
-
-That's an important distinction.
-
-So we should **save this email**.
-
-At the moment, I would consider:
-
-### Diabetes portability
-
-**🟢 Confirmed in writing by Care**
-
-But ultimately the **final policy schedule/portability approval** must reflect this correctly.
+And your **zero-claim history** makes the transition cleaner.
 
 ---
 
-# 7. Existing claims issue is now completely removed
+# 14. Niva still has important advantages
 
-And thank you for correcting this earlier.
+We shouldn't become biased toward Care just because their answers are good.
 
-Your actual status is:
+Niva still has:
 
-> **ZERO claims under Niva.**
+### ₹7.5L Base
 
-Care did not raise any concern about claims/underwriting based on claim history.
+### ₹7.5L Booster already accumulated
 
-So that's another positive.
+### ReAssure Forever
 
----
+### Smart Health+ Gold
 
-# 8. What about the Niva Booster?
+### 180-day post-hospitalisation
 
-This is now the one place where I don't want us to assume too much.
+### No Single Private Room restriction currently opted
 
-Care said:
+And importantly:
 
-> "We will consider both."
+> **This is an existing policy with established continuity.**
 
-That sounds positive.
-
-But I want the actual number.
-
-For example, we need something like:
-
-> Existing Niva Base SI ₹7.5L → Care portability credit ₹7.5L
-> Existing Niva Booster ₹7.5L → Care portability credit ₹7.5L
-> Total portability credit = ₹15L
-
-**OR**
-
-some other calculation.
-
-Until they give that number, we cannot say that your entire ₹15L has transferred.
+So the final decision should still be based on actual contractual comparison.
 
 ---
 
-# 9. I would send only ONE short follow-up now
+# 15. My updated scorecard
 
-Don't send another 20-question email.
+| Area                   | Niva               | Care                     | Winner            |
+| ---------------------- | ------------------ | ------------------------ | ----------------- |
+| Base SI                | ₹7.5L              | ₹10L                     | 🟢 Care           |
+| Portability credit     | Existing ₹15L      | **₹15L recognised**      | 🟢 Care confirmed |
+| Diabetes               | Smart Health+ Gold | **Day 1 portability**    | 🟰                |
+| Waiting period         | Already mature     | No additional            | 🟰                |
+| Recharge               | ReAssure mechanism | **Unlimited**            | 🟢 Care           |
+| Same illness recharge  | Need wording       | **Yes**                  | 🟢 Care           |
+| Same person recharge   | Need wording       | **Yes**                  | 🟢 Care           |
+| Family member recharge | Family floater     | **Yes**                  | 🟢 Care           |
+| Infinity Bonus         | —                  | **Yes**                  | 🟢 Care           |
+| ReAssure Forever       | **Yes**            | Different Unlimited Care | 🟢 Niva           |
+| Unlimited Care         | —                  | Yes                      | 🟢 Care           |
+| Modern treatment       | Covered            | No sub-limit stated      | 🟢 Care           |
+| Robotic                | Sub-limit visible  | No sub-limit stated      | 🟢 Care           |
+| Pre-hospital           | 60d                | 60d                      | 🟰                |
+| Post-hospital          | **180d**           | 90d                      | 🟢 Niva           |
+| Room                   | More flexible      | Single Private AC max    | 🟢 Niva           |
+| ICU                    | Strong             | No limit                 | 🟰                |
+| Premium                | Higher             | Lower                    | 🟢 Care           |
+| 2-year saving          | —                  | ₹3,412                   | 🟢 Care           |
+| Tenure Multiplier      | —                  | Extra rider              | —                 |
+| Existing claims        | **0**              | 0                        | 🟰                |
 
-Care has answered most of it.
+---
 
-Let's ask them just **4 remaining questions**.
+# 16. So where are we now?
 
-### Subject:
+I would move our status from:
 
-**Small clarification on Ultimate Care portability & 2-year option**
+### 🟡 "Don't port yet"
+
+to:
+
+# 🟡 **"Care looks potentially better, but final policy documents still need verification."**
+
+That's an important shift.
+
+I am **not yet saying port**.
+
+But Care has now successfully answered the most critical questions in your favor.
+
+---
+
+# 17. I would NOT send another long email
+
+We're down to a very small number of things.
+
+Actually, I would send **one final short email** asking for the **actual proposal/benefit illustration and portability approval**, rather than continuing the question-answer cycle.
+
+Something like:
+
+---
+
+### Subject: Final documents for portability review
 
 Hi,
 
-Thank you for the detailed response. Most of my questions are clear now.
+Thank you for clarifying all my questions. The information is now much clearer.
 
-I just need clarification on 4 points before I proceed:
+Before I proceed with the portability, could you please share the **final benefit illustration / portability approval / policy schedule** for my family showing the following:
 
-**1. Niva Booster portability**
+1. **₹15 lakh portability credit** (₹7.5L Base + ₹7.5L Booster) and how it is reflected in the new Care policy.
 
-You mentioned that my ₹7.5 lakh Base SI and ₹7.5 lakh Booster will both be considered.
+2. **₹10 lakh Base SI + ₹10 lakh Recharge + Unlimited Recharge**.
 
-Could you please confirm the **exact portability credit amount in ₹** that will be recognised in my Care policy from these two amounts?
+3. Confirmation that **Diabetes is covered from Day 1 under portability**, with continuity from 17-Oct-2022.
 
-**2. 2-year Tenure Multiplier**
+4. Confirmation that **Infinity Bonus is included** in the quoted premium.
 
-Your brochure mentions that Tenure Multiplier can combine the annual SI of a multi-year policy for a single claim.
+5. The exact **room restriction** and applicable claim deduction, if any.
 
-For my ₹10 lakh, 2-year policy, does this mean that **₹20 lakh can be used for one single claim**, subject to the policy terms?
+6. All applicable **underwriting conditions, exclusions, loading, co-payment and deductible**, if any.
 
-If not, please explain with a simple example.
+Also, please share the **additional premium for the Tenure Multiplier rider**, so I can understand whether it is worth considering.
 
-**3. 1-year vs 2-year coverage**
-
-I understand the 2-year premium is ₹61,962 and the second-year premium under the 1-year option would be ₹33,768.
-
-Apart from the premium saving, **is there any difference in coverage/benefits between the 1-year and 2-year options**, particularly regarding Tenure Multiplier, Infinity Bonus and Unlimited Recharge?
-
-**4. Room category**
-
-You mentioned Single Private AC Room or below.
-
-If a hospital admission requires/uses a room higher than Single Private AC Room, please confirm whether any **proportionate deduction** will apply to the hospitalisation claim.
-
-Once I have these four clarifications, I should have everything I need to make the decision.
+Once I receive these documents, I will review them and proceed accordingly.
 
 Thank you.
 
@@ -322,81 +552,59 @@ Regards,
 
 ---
 
-# 🧠 My updated view after receiving Care's reply
+# ⭐ One thing I'd definitely do before paying
 
-This has become **much closer than our original assessment**.
+Ask Care to give you the **premium breakup** for the ₹61,962 2-year quote.
 
-Initially I was leaning strongly toward:
+We now know it includes four riders:
 
-> 🟢 Niva
+* Wellness
+* Infinity Bonus
+* Annual Health Check-up
+* Room Rent Modification
 
-because we didn't know whether Care would preserve your continuity/diabetes/Booster.
+I want to know:
 
-Now Care has written:
+> **Base premium + each rider premium + GST = ₹61,962**
 
-### ✅ Continuity from 17-Oct-2022
-
-### ✅ No additional waiting period
-
-### ✅ ₹7.5L Base considered
-
-### ✅ ₹7.5L Booster considered
-
-### ✅ Diabetes Day 1 under portability
-
-### ✅ Unlimited Recharge
-
-### ✅ Same illness
-
-### ✅ Same person
-
-### ✅ Multiple times/year
-
-### ✅ Other family member
-
-### ✅ Infinity Bonus included
-
-### ✅ No ICU limit
-
-### ✅ No modern-treatment limit
-
-### ✅ No robotic surgery sub-limit
-
-That's **very encouraging**.
-
-The Care brochure independently confirms the strong recharge/bonus architecture. 
+That will help us determine whether you're paying a significant amount for benefits that you may or may not need.
 
 ---
 
-# 🟡 Current status
+# And one correction to our earlier thinking about 2 years
 
-I would now change our position from:
+We now have a definitive answer from Care:
 
-### 🟡 "Niva is clearly safer"
+### There is NO coverage difference between 1-year and 2-year.
 
-to:
+So:
 
-# 🟡 **"Care is now a serious contender — final decision pending 4 clarifications."**
+**2-year = cheaper way of buying the same quoted coverage**, according to Care.
 
-The four remaining issues are:
+₹31,606 + ₹33,768 = ₹65,374
 
-1. **Exact ₹ value of Niva Booster portability**
-2. **Does 2-year Tenure Multiplier give ₹20L single-claim capacity?**
-3. **Exact 1-year vs 2-year benefit difference**
-4. **Room restriction/proportionate deduction**
+versus
 
-Once Care answers those, I think we can make a **proper final decision**.
+**₹61,962**
 
-And importantly, because your **Niva has zero claims**, the Care portability picture is considerably cleaner than we initially thought.
+Therefore:
 
-### My current preliminary lean
+### Saving = ₹3,412 over two years.
 
-If Care confirms:
+So **if we ultimately choose Care, my current preference would be the 2-year option**, assuming the final policy terms are identical.
 
-> **full ₹7.5L + ₹7.5L portability credit + Day-1 diabetes + 0 co-pay + ₹0 deductible + acceptable room treatment + genuine 2-year Tenure Multiplier**
+I would **not pay extra for Tenure Multiplier automatically**. Let's first see its rider premium and exact benefit.
 
-then I would be **seriously inclined toward Care**, particularly given the lower premium and very strong Unlimited Recharge/Infinity Bonus structure.
+---
 
-If they cannot clearly quantify the Booster transfer or Tenure Multiplier, I'd be much more cautious.
+## Current decision status
 
-**So don't renew/port based on this email yet.** Send the small 4-point follow-up, get the answers, and then we'll do the final Niva vs Care calculation.
+### 🟢 Niva — still completely viable
+
+### 🟢 Care — now genuinely attractive
+
+### 🟡 Final decision — **pending final Care policy/portability documents**
+
+And the **₹15L portability confirmation + Day-1 diabetes confirmation** are two very significant positives for Care.
+
+Once you get the final quotation/benefit illustration or policy schedule, **that's the document I want to see next**. Then we can stop asking Care questions and do the final **Niva renewal vs Care 1-year vs Care 2-year** decision with actual numbers.
