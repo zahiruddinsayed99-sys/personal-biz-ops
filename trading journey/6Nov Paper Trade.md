@@ -1,5 +1,88 @@
-A mechanical morning routine filters the 30 Sensex constituents into **1 or 2 high-probability Call or Put option targets** before your active 11:30 AM – 1:30 PM execution window.
+### What Was Updated in Version 2
 
+This updated version incorporates the morning macro filters, Sensex constituent logic, and automated rules designed to remove emotion and human error.
+
+```
+[Tab 1: Morning_Market_Radar]        ---> Sets macro bias (VIX + Sensex VWAP) & screens Sensex constituents
+[Tab 2: Trade_Execution_Tracker]     ---> Mechanical calculator for Entry, SL, Stage 1/2 Trailing & 2x Target
+[Tab 3: Emotion_Discipline_Protocol] ---> Psychological firewall linking each trade phase to broker order actions
+
+```
+
+---
+
+### Key Structural Enhancements
+
+#### 1. Tab 1: `Morning_Market_Radar` (Sensex 30 Screener)
+
+* **India VIX Volatility Filter**:
+* Automatically flags VIX as **`LOW VIX (<11.5)`**, **`SWEET SPOT (12.0 - 16.5)`**, or **`HIGH VIX (>18.0)`**.
+
+
+* **Sensex Regime & Permitted Trade Direction**:
+* Evaluates Sensex position vs. yesterday's close, 15m/5m VWAP, and EMA alignment.
+* Dynamically outputs **`STRICTLY CALL (CE) BUYING ONLY`**, **`STRICTLY PUT (PE) BUYING ONLY`**, or **`STAY IN CASH / OUTLIERS ONLY`**.
+
+
+* **Sensex 30 Constituent Screener Table**:
+* Categorizes stocks into **Cluster A (Heavyweight Drivers)** and **Cluster B (High-Beta Momentum)**.
+* Tracks opening percentage, volume spike relative to the 20 SMA, Cash Spot vs. VWAP, Futures OI buildup (Long/Short Buildup vs. Unwinding/Covering), ATM option strike, and base consolidation status.
+* **Automated System Readiness Formula**: Automatically outputs **`READY FOR 11:30 BREAKOUT`**, **`WAIT FOR BASE TO CLOSE`**, or **`REJECT (No Alignment)`**.
+
+
+
+#### 2. Tab 2: `Trade_Execution_Tracker` (Execution Engine)
+
+* **Pre-Trade Risk Filter**: Enter your **Entry Price** and **Base Low**; the sheet instantly calculates Risk Points and Risk %:
+* **`< 15%`**: Displays **`APPROVED (<15%)`**.
+
+
+* **`15% - 20%`**: Displays **`MARGINAL (15-20%)`**.
+
+
+* **`> 20%`**: Displays **`REJECT (>20%)`** (prevents oversized stop-loss risk).
+
+
+
+
+* **Automated Target Milestones**:
+* **Stage 1 (+25%)**: Calculates the price target and displays: *`Shift SL to Cost (₹X.XX)`*.
+
+
+* **Stage 2 (+50%)**: Calculates the target and displays: *`Lock SL at last 2-candle low`*.
+
+
+* **Stage 3**: Displays reminder: *`HOLD while 3m Close > 9 EMA`*.
+
+
+* **Stage 4**: Calculates the exact **2x Target Price**.
+
+
+
+
+* **Friction & Net PnL**: Deducts standard exchange/broker friction (**₹65.00 flat per trade**) to display exact net realized returns and net ROI %.
+* Includes your **BAJFINANCE NOV 1080 CE** benchmark trade on Row 5, followed by 20 formatted blank template rows with formulas intact.
+
+
+
+#### 3. Tab 3: `Emotion_Discipline_Protocol` (Psychological Firewall)
+
+* Maps each trading step directly to a mechanical broker action (Limit Buy, Hard GTT Stop-Loss, trailing orders) to eliminate hesitation, fear of losing floating profits, over-monitoring, and revenge trading.
+
+---
+
+### How to Run Your Routine Tomorrow Morning
+
+1. **09:15 – 09:30 AM**: Open `Morning_Market_Radar`, input current India VIX and Sensex VWAP status, and commit strictly to CE or PE.
+2. **09:30 – 10:30 AM**: Check top gainers/losers among Sensex heavyweights, select the top 2 that show volume expansion ($\ge 1.5\text{x}$) and OI alignment, and note their ATM contracts.
+3. **10:30 – 11:30 AM (Freeze Hour)**: Do not place orders; observe the 3-minute option chart to see if a 4- to 6-candle consolidation base forms.
+
+
+4. **11:30 AM – 1:30 PM (Execution Window)**: Input the prospective entry and base low into `Trade_Execution_Tracker`. If the risk is **`APPROVED (<15%)`**, set your trigger and execute mechanically as soon as the breakout candle closes.
+
+
+
+Would you like to add specific broker order placement instructions (such as exact Zerodha GTT trigger vs. limit price offsets) directly onto the Discipline Protocol sheet?
 ---
 
 ### Step 1: Macro & Market Regime Check (09:15 – 09:30 AM)
