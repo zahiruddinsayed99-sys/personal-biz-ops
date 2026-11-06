@@ -1,3 +1,96 @@
+A mechanical morning routine filters the 30 Sensex constituents into **1 or 2 high-probability Call or Put option targets** before your active 11:30 AM – 1:30 PM execution window.
+
+---
+
+### Step 1: Macro & Market Regime Check (09:15 – 09:30 AM)
+
+Before looking at individual stocks, determine whether today favors **Call (CE) Buying**, **Put (PE) Buying**, or **Sitting in Cash**.
+
+#### 1. India VIX Filter (Option Buying Feasibility)
+
+* **VIX < 11.5 (Low Volatility / Severe Theta Decay)**: Premiums move sluggishly and consolidation bases take longer to expand. Restrict trades to top heavyweights showing extraordinary volume.
+* **VIX 12.0 – 16.5 (Sweet Spot)**: Ideal for the 1-Lot Momentum Blueprint. Steady directional trends allow fast +25% to +50% expansions without erratic whip-saws.
+* **VIX > 18.0 (High Volatility)**: Wide intraday swings. Option premiums will have high IV, requiring tighter stop-loss point limits ($< 10\%$) because mean reversion happens quickly.
+
+#### 2. Sensex Index Trend (Directional Bias)
+
+Compare the BSE Sensex cash chart and its VWAP:
+
+* **Bullish Regime (CE Bias)**: Sensex trades above yesterday’s close AND sustains **above 15m/5m VWAP** with 9 EMA > 26 EMA. Only look for **CE buying setups**.
+* **Bearish Regime (PE Bias)**: Sensex trades below yesterday’s close AND sustains **below 15m/5m VWAP** with 9 EMA < 26 EMA. Only look for **PE buying setups**.
+* **Choppy / Flat Regime (Sensex crisscrossing VWAP within $\pm 0.25\%$)**: Skip index heavyweights; restrict focus exclusively to individual stock outliers with independent high-relative-volume catalysts.
+
+---
+
+### Step 2: Sensex Constituent Filtering (09:30 – 10:15 AM)
+
+The BSE Sensex is dominated by its top 10 heavyweights (~65% total weight). Categorize your search pool into two distinct clusters:
+
+* **Cluster A (Index Drivers)**: HDFC Bank, ICICI Bank, Reliance Industries, Bharti Airtel, State Bank of India, Infosys, TCS.
+* **Cluster B (High-Beta Momentum Movers)**: Bajaj Finance, Tata Steel, M&M, Axis Bank, Sun Pharma, Titan.
+
+#### The 4-Step Selection Filter:
+
+| Filter Parameter | Call (CE) Candidate Rules | Put (PE) Candidate Rules |
+| --- | --- | --- |
+| **Price Action** | Up **+0.8% to +2.5%** (avoid extended >4% gap-ups) | Down **-0.8% to -2.5%** (avoid extended >4% panic gaps) |
+| **Volume vs 20 SMA** | 15-min volume tracks **$\ge 1.5\text{x}$ 20-period volume SMA** | 15-min volume tracks **$\ge 1.5\text{x}$ 20-period volume SMA** |
+| **VWAP Relationship** | Cash Spot & Futures sustained **strictly above VWAP** | Cash Spot & Futures sustained **strictly below VWAP** |
+| **Derivatives Data** | **Long Buildup**: Futures Price $\uparrow$ + Futures OI $\uparrow$ | **Short Buildup**: Futures Price $\downarrow$ + Futures OI $\uparrow$ |
+
+*Discard any stock in "Long Unwinding" (Price $\downarrow$, OI $\downarrow$) or "Short Covering" (Price $\uparrow$, OI $\downarrow$) because those moves lack institutional momentum.*
+
+---
+
+### Step 3: Triangulating the 3 Charts (10:15 – 10:30 AM)
+
+Once 2 candidate stocks pass the filters (e.g., 1 CE candidate and 1 PE candidate), open their respective charts side-by-side in Zerodha or TradingView:
+
+```
+[Chart 1: Cash Spot (5m/3m)]    ---> Confirms structural support/resistance
+[Chart 2: Stock Futures (3m)]    ---> Confirms institutional volume & VWAP hold
+[Chart 3: ATM Option (3m)]       ---> Primary execution chart (Blueprint rules)
+
+```
+
+#### Selecting the Exact Strike:
+
+* Always choose the **nearest At-The-Money (ATM)** or **1-strike In-The-Money (ITM)** monthly contract.
+* **Liquidity Check**: Look at the market depth / order book on Zerodha. The bid-ask spread must be **1 tick (₹0.05 to ₹0.10)**. If the spread is ₹0.30 or wider, discard the contract immediately.
+
+---
+
+### Step 4: The 10:30 – 11:30 AM Freeze & 11:30 AM Signal Execution
+
+Between 10:30 AM and 11:30 AM, institutions establish mid-day inventory. **Do not enter early.** Use this hour to monitor your 3-Minute Option Premium chart for the Blueprint Pre-Conditions:
+
+1. **Option Premium vs VWAP**:
+* **For CE**: Call premium must remain **above its own VWAP**.
+
+
+* **For PE**: Put premium must remain **above its own VWAP**. *(Note: Even for a falling stock, its PE premium must be rising and trading above the PE chart's VWAP)*.
+
+
+
+
+2. **Base Formation**: Identify a **4 to 6 candle tight horizontal consolidation base** near the 9 and 26 EMA crossover.
+
+
+3. **Pre-Calculate Risk Before 11:30 AM**:
+* Measure the distance from the top of the base (Trigger) to the base swing low.
+
+
+* If $\text{Risk} \le 15\%$: Trade is pre-approved.
+
+
+* If the breakout candle closes after 11:30 AM, execute the trade immediately and enter the parameters into your `Trade_Execution_Tracker`.
+
+
+
+
+
+Would you like to add automated conditional formatting into your `Morning_Stock_Radar` sheet to color-code stocks based on CE (Long Buildup) vs PE (Short Buildup) criteria?
+---
 ### Step-by-Step Blueprint & Screener Setup
 
 To trade this system patiently and eliminate emotional decision-making, mechanical execution must replace live screen staring.
